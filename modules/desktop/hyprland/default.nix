@@ -26,10 +26,12 @@
 		if [ ! -d "$BG_DEST" ]; then
 			mkdir -p "$BG_DEST"
 			cp "$BG_SRC"/* "$BG_DEST/"
+			chmod u+w "$BG_DEST"/*
 		fi
 
 		if [ ! -f "$BG_DEFAULT" ]; then
 			cp "$BG_SRC/default.jpg" "$BG_DEFAULT"
+			chmod u+w "$BG_DEFAULT"
 		fi
 	'';
 

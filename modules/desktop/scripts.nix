@@ -385,7 +385,9 @@ set -U fish_pager_color_selected_background --background=$SEL_HEX
 		path="$BG_DIR/$chosen"
 
 		# ── Apply wallpaper ──────────────────────────────────────────
+		rm -f "$CURRENT"
 		cp "$path" "$CURRENT"
+		chmod u+w "$CURRENT"
 		killall hyprpaper 2>/dev/null; sleep 0.3; hyprpaper &
 
 		# ── Persist as default in nix repo ───────────────────────────
