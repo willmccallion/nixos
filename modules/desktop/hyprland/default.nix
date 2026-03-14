@@ -56,8 +56,11 @@ splash = false
 			"$menu" = "wofi --show drun";
 			"$mainMod" = "Alt_L";
 
-			# ── Monitors (auto-detect) ────────────────────────────────
-			monitor = ", preferred, auto, 1";
+			# ── Monitors ──────────────────────────────────────────────
+			monitor = [
+				"HDMI-A-1, 1920x1080@60, 0x0, 1"    # HP 27w  (left)
+				"HDMI-A-2, 1920x1080@60, 1920x0, 1"  # OMEN 27 (right)
+			];
 
 			# ── Autostart ─────────────────────────────────────────────
 			exec-once = [

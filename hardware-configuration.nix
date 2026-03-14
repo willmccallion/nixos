@@ -8,23 +8,54 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/luks-6c632c4e-c3b3-45a1-b361-aaf661623745";
+    { device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
+    };
+
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/22ee2500-91aa-4466-b681-9ee1a2ad74d7";
+
+  fileSystems."/home" =
+    { device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = [ "subvol=@nix" ];
+    };
+
+  fileSystems."/.snapshots" =
+    { device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = [ "subvol=@snapshots" ];
+    };
+
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/1DC0-157F";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  fileSystems."/boot" = 
+    { device = "/dev/disk/by-uuid/4df5e54b-6654-45d3-bbbd-99f502478824";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-6c632c4e-c3b3-45a1-b361-aaf661623745".device = "/dev/disk/by-uuid/6c632c4e-c3b3-45a1-b361-aaf661623745";
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/9A0A-3C80";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+  fileSystems."/data" =
+    { device = "/dev/mapper/cryptdata";
+      fsType = "btrfs";
     };
+
+  boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/ed0d45f8-d2bf-42e9-bad1-198f90734793";
 
   swapDevices = [ ];
 
