@@ -415,12 +415,14 @@ let
 		cp "$path" "$NIX_BG" 2>/dev/null || true
 
 		# ── Extract accent color ─────────────────────────────────────
-		read -r R G B < <(${pkgs.python3}/bin/python3 - "$path" << 'PYEOF'
+		CONVERT_BIN="${pkgs.imagemagick}/bin/convert"
+		read -r R G B < <(${pkgs.python3}/bin/python3 - "$path" "$CONVERT_BIN" << 'PYEOF'
 		import subprocess, re, sys
 
 		path = sys.argv[1]
+		convert_bin = sys.argv[2]
 		result = subprocess.run([
-			'${pkgs.imagemagick}/bin/convert', path,
+			convert_bin, path,
 			'-resize', '200x200^', '-gravity', 'center', '-extent', '200x200',
 			'+dither', '-colors', '12', '-unique-colors', 'txt:-'
 		], capture_output=True, text=True)
