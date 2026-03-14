@@ -385,7 +385,6 @@ set -U fish_pager_color_selected_background --background=$SEL_HEX
 		path="$BG_DIR/$chosen"
 
 		# ── Apply wallpaper ──────────────────────────────────────────
-		hyprctl hyprpaper preload "$path"
 		hyprctl hyprpaper wallpaper "HDMI-A-1,$path"
 		hyprctl hyprpaper wallpaper "HDMI-A-2,$path"
 		cp "$path" "$CURRENT"

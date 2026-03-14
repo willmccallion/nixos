@@ -34,19 +34,17 @@
 	'';
 
 	xdg.configFile."hypr/hyprpaper.conf".text = ''
-		preload = /home/will/.config/hypr/background.jpg
+wallpaper {
+    monitor = HDMI-A-1
+    path = /home/will/.config/hypr/background.jpg
+}
 
-		wallpaper {
-			monitor = HDMI-A-1
-			path = /home/will/.config/hypr/background.jpg
-		}
+wallpaper {
+    monitor = HDMI-A-2
+    path = /home/will/.config/hypr/background.jpg
+}
 
-		wallpaper {
-			monitor = HDMI-A-2
-			path = /home/will/.config/hypr/background.jpg
-		}
-
-		splash = false
+splash = false
 	'';
 
 	# ── Compositor ─────────────────────────────────────────────────────────
