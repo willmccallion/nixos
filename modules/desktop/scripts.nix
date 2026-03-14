@@ -323,31 +323,31 @@ let
 		DIM_HEX=$(printf "%02x%02x%02x" "$DIM_R" "$DIM_G" "$DIM_B")
 		SEL_HEX=$(printf "%02x%02x%02x" "$ACC_DIM_R" "$ACC_DIM_G" "$ACC_DIM_B")
 
-		${pkgs.fish}/bin/fish -c "
-		set -U fish_color_user         $FISH_HEX
-		set -U fish_color_host         $CPU_HEX
-		set -U fish_color_host_remote  $NET_HEX
-		set -U fish_color_cwd          $MEM_HEX
+		${pkgs.fish}/bin/fish -c '
+		set -U fish_color_user         '"$FISH_HEX"'
+		set -U fish_color_host         '"$CPU_HEX"'
+		set -U fish_color_host_remote  '"$NET_HEX"'
+		set -U fish_color_cwd          '"$MEM_HEX"'
 		set -U fish_color_cwd_root     e14b4b
 		set -U fish_color_normal       d7d7e4
-		set -U fish_color_command      $GPU_HEX
-		set -U fish_color_keyword      $MEM_HEX
-		set -U fish_color_quote        $NET_HEX
-		set -U fish_color_redirection  $VOL_HEX
-		set -U fish_color_end          $DIM_HEX
+		set -U fish_color_command      '"$GPU_HEX"'
+		set -U fish_color_keyword      '"$MEM_HEX"'
+		set -U fish_color_quote        '"$NET_HEX"'
+		set -U fish_color_redirection  '"$VOL_HEX"'
+		set -U fish_color_end          '"$DIM_HEX"'
 		set -U fish_color_error        e14b4b
-		set -U fish_color_param        $CPU_HEX
-		set -U fish_color_comment      $DIM_HEX
-		set -U fish_color_operator     $FISH_HEX
-		set -U fish_color_escape       $NET_HEX
-		set -U fish_color_autosuggestion $DIM_HEX
-		set -U fish_color_selection    --background=$SEL_HEX
-		set -U fish_color_search_match --background=$SEL_HEX
-		set -U fish_pager_color_prefix         $FISH_HEX
+		set -U fish_color_param        '"$CPU_HEX"'
+		set -U fish_color_comment      '"$DIM_HEX"'
+		set -U fish_color_operator     '"$FISH_HEX"'
+		set -U fish_color_escape       '"$NET_HEX"'
+		set -U fish_color_autosuggestion '"$DIM_HEX"'
+		set -U fish_color_selection    --background='"$SEL_HEX"'
+		set -U fish_color_search_match --background='"$SEL_HEX"'
+		set -U fish_pager_color_prefix         '"$FISH_HEX"'
 		set -U fish_pager_color_completion     d7d7e4
-		set -U fish_pager_color_description   $DIM_HEX
-		set -U fish_pager_color_selected_background --background=$SEL_HEX
-		" 2>/dev/null || true
+		set -U fish_pager_color_description   '"$DIM_HEX"'
+		set -U fish_pager_color_selected_background --background='"$SEL_HEX"'
+		' 2>/dev/null || true
 	'';
 
 	# ── Toggle theme (Alt+B) ───────────────────────────────────────────────
