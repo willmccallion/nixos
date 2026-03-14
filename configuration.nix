@@ -63,7 +63,7 @@
   	enable = true;
 	settings = {
 		default_session = {
-			command = "hyprland";
+			command = "Hyprland";
 			user = "will";
 		};
 	};

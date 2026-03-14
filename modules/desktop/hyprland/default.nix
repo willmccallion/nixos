@@ -34,6 +34,8 @@
 	'';
 
 	xdg.configFile."hypr/hyprpaper.conf".text = ''
+preload = /home/will/.config/hypr/background.jpg
+
 wallpaper {
     monitor =
     path = /home/will/.config/hypr/background.jpg
@@ -58,6 +60,7 @@ splash = false
 			# ── Autostart ─────────────────────────────────────────────
 			exec-once = [
 				"hyprpaper"
+				"touch /tmp/waybar-rounded"
 				"waybar"
 			];
 
@@ -71,9 +74,9 @@ splash = false
 
 			# ── General ───────────────────────────────────────────────
 			general = {
-				gaps_in = 0;
-				gaps_out = 0;
-				border_size = 0;
+				gaps_in = "4 4 4 4";
+				gaps_out = "8 8 8 8";
+				border_size = 1;
 				"col.active_border" = "rgba(1a1a1aee)";
 				resize_on_border = false;
 				allow_tearing = false;
@@ -82,7 +85,7 @@ splash = false
 
 			# ── Decoration ────────────────────────────────────────────
 			decoration = {
-				rounding = 0;
+				rounding = 10;
 				rounding_power = 2;
 				active_opacity = 1.0;
 				inactive_opacity = 1.0;
