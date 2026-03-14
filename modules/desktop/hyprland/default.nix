@@ -6,6 +6,13 @@
 { pkgs, lib, ... }:
 
 {
+	home.pointerCursor = {
+		name = "Bibata-Modern-Classic";
+		package = pkgs.bibata-cursors;
+		size = 24;
+		gtk.enable = true;
+	};
+
 	home.packages = with pkgs; [
 		grim
 		slurp
@@ -13,6 +20,7 @@
 		hyprpaper
 		playerctl
 		brightnessctl
+		bibata-cursors
 	];
 
 	# ── Wallpapers ─────────────────────────────────────────────────────────
@@ -62,6 +70,20 @@ splash = false
 				"HDMI-A-2, 1920x1080@60, 1920x0, 1"  # OMEN 27 (right)
 			];
 
+			# ── Workspace → monitor binding ───────────────────────────
+			workspace = [
+				"1, monitor:HDMI-A-1, default:true"
+				"2, monitor:HDMI-A-1"
+				"3, monitor:HDMI-A-1"
+				"4, monitor:HDMI-A-1"
+				"5, monitor:HDMI-A-1"
+				"6, monitor:HDMI-A-2, default:true"
+				"7, monitor:HDMI-A-2"
+				"8, monitor:HDMI-A-2"
+				"9, monitor:HDMI-A-2"
+				"10, monitor:HDMI-A-2"
+			];
+
 			# ── Autostart ─────────────────────────────────────────────
 			exec-once = [
 				"hyprpaper"
@@ -72,10 +94,13 @@ splash = false
 			# ── Environment ───────────────────────────────────────────
 			env = [
 				"XCURSOR_SIZE, 24"
+				"XCURSOR_THEME, Bibata-Modern-Classic"
 				"HYPRCURSOR_SIZE, 24"
+				"HYPRCURSOR_THEME, Bibata-Modern-Classic"
 				"GDK_BACKEND, wayland,x11"
 				"__GLX_VENDOR_LIBRARY_NAME, nvidia"
 			];
+
 
 			# ── General ───────────────────────────────────────────────
 			general = {
@@ -261,6 +286,10 @@ splash = false
 
 		extraConfig = ''
 			ecosystem:no_update_news = true
+
+			cursor {
+				no_hardware_cursors = true
+			}
 		'';
 	};
 }
