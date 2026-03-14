@@ -35,12 +35,7 @@
 
 	xdg.configFile."hypr/hyprpaper.conf".text = ''
 wallpaper {
-    monitor = HDMI-A-1
-    path = /home/will/.config/hypr/background.jpg
-}
-
-wallpaper {
-    monitor = HDMI-A-2
+    monitor =
     path = /home/will/.config/hypr/background.jpg
 }
 
@@ -57,11 +52,8 @@ splash = false
 			"$menu" = "wofi --show drun";
 			"$mainMod" = "Alt_L";
 
-			# ── Monitors ──────────────────────────────────────────────
-			monitor = [
-				"HDMI-A-2, 1920x1080@60, 0x0, 1"
-				"HDMI-A-1, 1920x1080@120, 1920x0, 1"
-			];
+			# ── Monitors (auto-detect) ────────────────────────────────
+			monitor = ", preferred, auto, 1";
 
 			# ── Autostart ─────────────────────────────────────────────
 			exec-once = [
@@ -159,9 +151,9 @@ splash = false
 			};
 
 			# ── Window rules ──────────────────────────────────────────
-			windowrulev2 = [
-				"opacity 0.72 0.65, class:btop-float"
-				"opacity 0.85 0.78, class:claude-float"
+			windowrule = [
+				"match:class ^(btop-float)$, opacity 0.72 0.65"
+				"match:class ^(claude-float)$, opacity 0.85 0.78"
 			];
 
 			# ── Key bindings ──────────────────────────────────────────
