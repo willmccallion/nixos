@@ -384,17 +384,9 @@ set -U fish_pager_color_selected_background --background=$SEL_HEX
 
 		path="$BG_DIR/$chosen"
 
-		# ── Apply wallpaper to all monitors ──────────────────────────
-		hyprctl hyprpaper preload "$path"
-		for mon in $(hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[].name'); do
-			hyprctl hyprpaper wallpaper "$mon,$path"
-		done
-		hyprctl hyprpaper unload all
-		hyprctl hyprpaper preload "$path"
-		for mon in $(hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[].name'); do
-			hyprctl hyprpaper wallpaper "$mon,$path"
-		done
+		# ── Apply wallpaper ──────────────────────────────────────────
 		cp "$path" "$CURRENT"
+		killall hyprpaper 2>/dev/null; sleep 0.3; hyprpaper &
 
 		# ── Persist as default in nix repo ───────────────────────────
 		NIX_BG="$HOME/.config/nixos/modules/desktop/hyprland/backgrounds/default.jpg"
