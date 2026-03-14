@@ -57,9 +57,8 @@ splash = false
 
 			# ── Autostart ─────────────────────────────────────────────
 			exec-once = [
-				"waybar"
-				"sleep 0.5 && pkill -SIGUSR1 waybar"
 				"hyprpaper"
+				"waybar"
 			];
 
 			# ── Environment ───────────────────────────────────────────
