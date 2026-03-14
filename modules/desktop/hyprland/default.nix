@@ -3,7 +3,7 @@
 ## Dual monitor, dwindle layout, full animations, nvidia env vars.
 ## Dynamic theming via toggle-theme (Alt+B) and wallpaper picker (Alt+W).
 ## Remove this import from desktop/default.nix to disable.
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
 	home.packages = with pkgs; [
@@ -18,7 +18,7 @@
 	# ── Wallpapers ─────────────────────────────────────────────────────────
 	# Copy backgrounds to ~/.config/hypr/ (writable, so wallpaper picker can
 	# update background.jpg at runtime). Only copies if backgrounds dir is missing.
-	home.activation.deployWallpapers = ''
+	home.activation.deployWallpapers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
 		BG_SRC="${./backgrounds}"
 		BG_DEST="$HOME/.config/hypr/backgrounds"
 		BG_DEFAULT="$HOME/.config/hypr/background.jpg"

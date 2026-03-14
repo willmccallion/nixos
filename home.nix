@@ -1,7 +1,7 @@
 ## ── Home Manager ──────────────────────────────────────────────────────────────
 ## Entry point for user-level configuration.
 ## Each module category can be commented out independently.
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
 	imports = [
@@ -20,7 +20,7 @@
 	# ── Neovim (standalone config, cross-platform) ────────────────────────
 	# The nvim config lives as a git submodule at modules/dev/nvim.
 	# Nix flakes can't see submodule contents, so we symlink at activation.
-	home.activation.linkNvimConfig = ''
+	home.activation.linkNvimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
 		NVIM_SRC="$HOME/.config/nixos/modules/dev/nvim"
 		NVIM_DEST="$HOME/.config/nvim"
 		if [ -d "$NVIM_SRC" ] && [ ! -e "$NVIM_DEST" ]; then
