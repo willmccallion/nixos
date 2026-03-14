@@ -18,8 +18,15 @@
 	home.stateVersion = "25.11";
 
 	# ── Neovim (standalone config, cross-platform) ────────────────────────
-	# Symlink the nvim submodule to ~/.config/nvim
-	xdg.configFile."nvim".source = ./modules/dev/nvim;
+	# The nvim config lives as a git submodule at modules/dev/nvim.
+	# Nix flakes can't see submodule contents, so we symlink at activation.
+	home.activation.linkNvimConfig = ''
+		NVIM_SRC="$HOME/.config/nixos/modules/dev/nvim"
+		NVIM_DEST="$HOME/.config/nvim"
+		if [ -d "$NVIM_SRC" ] && [ ! -e "$NVIM_DEST" ]; then
+			ln -sf "$NVIM_SRC" "$NVIM_DEST"
+		fi
+	'';
 
 	programs.home-manager.enable = true;
 }
