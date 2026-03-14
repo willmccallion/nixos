@@ -1,0 +1,100 @@
+## ── Fish Shell ────────────────────────────────────────────────────────────────
+## Core fish configuration: environment, vi bindings, aliases, abbreviations.
+## Fish functions are in a separate module (fish-functions.nix).
+## Remove this import from shell/default.nix to disable.
+{ pkgs, ... }:
+
+{
+	programs.fish = {
+		enable = true;
+
+		# ── Interactive session ────────────────────────────────────────────
+		interactiveShellInit = ''
+			# Disable greeting
+			set fish_greeting ""
+
+			# Vi key bindings
+			fish_vi_key_bindings
+
+			# Zoxide (smart cd)
+			zoxide init fish | source
+
+			# Kitty / Wayland clipboard integration
+			if set -q SSH_TTY
+				function wl-copy
+					if count $argv > /dev/null
+						printf "%s" "$argv" | kitten clipboard
+					else
+						kitten clipboard
+					end
+				end
+				function copy; wl-copy $argv; end
+				function wl-paste; kitten clipboard --get-clipboard; end
+			else
+				function copy; command wl-copy $argv; end
+			end
+		'';
+
+		# ── Environment variables ──────────────────────────────────────────
+		shellInit = ''
+			set -gx EDITOR nvim
+			set -gx VISUAL nvim
+
+			fish_add_path ~/.cargo/bin
+			fish_add_path ~/.local/bin
+
+			# Wayland
+			if not set -q WAYLAND_DISPLAY
+				set -gx WAYLAND_DISPLAY wayland-1
+			end
+			set -gx XDG_RUNTIME_DIR /run/user/(id -u)
+		'';
+
+		# ── Aliases ────────────────────────────────────────────────────────
+		shellAliases = {
+			# Editor
+			vim = "nvim";
+
+			# Modern CLI replacements
+			ls = "eza --icons --git --header";
+			ll = "eza -al --icons --git --header";
+			lt = "eza --tree --level=2 --icons";
+			cat = "bat";
+
+			# Kitty
+			icat = "kitten icat";
+
+			# Config shortcuts
+			conff = "nvim ~/.config/nixos/modules/shell/fish.nix";
+			reload = "source ~/.config/fish/config.fish";
+
+			# NixOS management
+			nixswitch = "sudo nixos-rebuild switch --flake ~/.config/nixos#nixos";
+			nixupdate = "sudo nix flake update ~/.config/nixos && nixswitch";
+			nixgc = "sudo nix-collect-garbage -d";
+		};
+
+		# ── Abbreviations (auto-expanding) ─────────────────────────────────
+		shellAbbrs = {
+			# Cargo
+			c = "cargo";
+			cr = "cargo run";
+			cw = "cargo watch -x run";
+
+			# Compiler
+			g = "gcc -Wall -Wextra -g";
+			val = "valgrind --leak-check=full --show-leak-kinds=all";
+
+			# Git
+			ga = "git add .";
+			gc = "git commit -m";
+			gp = "git push";
+			gs = "git status";
+			gd = "git diff";
+		};
+	};
+
+	home.packages = with pkgs; [
+		zoxide
+	];
+}

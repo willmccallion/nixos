@@ -1,0 +1,109 @@
+/* ── Rounded / Hyprland pill mode ──────────────────────────────── */
+/* Default colors (cool silver). Regenerated at runtime by apply-accent. */
+* {
+    font-family: "CaskaydiaCove Nerd Font", monospace;
+    font-size: 13px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: rgba(215, 215, 228, 0.92);
+}
+
+.modules-left {
+    background: rgba(12, 12, 18, 0.78);
+    border-radius: 0 12px 12px 0;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: none;
+    padding: 0 14px 0 8px;
+    margin: 4px 0;
+}
+
+.modules-center {
+    background: rgba(12, 12, 18, 0.80);
+    border-radius: 12px;
+    border: 1px solid rgba(185, 185, 195, 0.28);
+    padding: 0 20px;
+    margin: 4px 0;
+}
+
+.modules-right {
+    background: rgba(12, 12, 18, 0.78);
+    border-radius: 12px 0 0 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-right: none;
+    padding: 0 8px 0 14px;
+    margin: 4px 0;
+}
+
+#workspaces button {
+    padding: 2px 9px;
+    color: rgba(126, 126, 127, 0.65);
+    background: transparent;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    font-weight: 400;
+    margin: 0 1px;
+}
+
+#workspaces button.active {
+    color: rgba(185, 185, 195, 0.97);
+    background: rgba(185, 185, 195, 0.18);
+    font-weight: 600;
+}
+
+#workspaces button.occupied {
+    color: rgba(126, 126, 127, 0.85);
+}
+
+#workspaces button:hover {
+    color: rgba(255, 255, 255, 0.88);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#window {
+    color: rgba(126, 126, 127, 0.50);
+    font-size: 12px;
+    padding: 0 4px;
+    font-style: italic;
+}
+
+#clock {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: rgba(185, 185, 195, 0.97);
+    padding: 0 4px;
+}
+
+#custom-gpu,
+#custom-cputemp,
+#cpu,
+#memory,
+#custom-netspeed,
+#pulseaudio,
+#tray {
+    padding: 0 8px;
+}
+
+#custom-gpu          { color: rgba(212, 212, 216, 0.90); }
+#custom-gpu.warning  { color: rgba(225, 185, 65, 0.92); }
+#custom-gpu.critical { color: rgba(225, 75, 75, 0.97); }
+
+#custom-cputemp          { color: rgba(180, 180, 183, 0.88); }
+#custom-cputemp.warning  { color: rgba(225, 185, 65, 0.92); }
+#custom-cputemp.critical { color: rgba(225, 75, 75, 0.97); }
+
+#cpu             { color: rgba(180, 180, 183, 0.80); }
+#memory          { color: rgba(155, 155, 158, 0.82); }
+#custom-netspeed { color: rgba(196, 196, 198, 0.82); font-size: 12px; }
+#pulseaudio      { color: rgba(171, 171, 173, 0.82); }
+#pulseaudio.muted { color: rgba(165, 70, 70, 0.88); }
+
+#tray { padding: 0 6px; }
+#tray > .passive { -gtk-icon-effect: dim; }

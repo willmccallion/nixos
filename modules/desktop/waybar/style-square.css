@@ -1,0 +1,96 @@
+/* ── Square / default mode ─────────────────────────────────── */
+* {
+    font-family: "CaskaydiaCove Nerd Font", monospace;
+    font-size: 13px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: rgba(8, 8, 10, 0.88);
+    color: rgba(210, 210, 220, 0.88);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    padding: 0 6px;
+}
+
+#workspaces button {
+    padding: 2px 8px;
+    color: rgba(130, 130, 150, 0.5);
+    background: transparent;
+    transition: color 0.1s ease;
+    font-weight: 400;
+}
+
+#workspaces button.active {
+    color: rgba(210, 210, 240, 0.95);
+    font-weight: 600;
+}
+
+#workspaces button.occupied {
+    color: rgba(160, 160, 185, 0.65);
+}
+
+#workspaces button:hover {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+#window {
+    color: rgba(150, 150, 170, 0.5);
+    font-size: 12px;
+    padding: 0 4px;
+    font-style: italic;
+}
+
+#clock {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: rgba(225, 225, 240, 0.97);
+    padding: 0 16px;
+}
+
+#custom-gpu,
+#custom-cputemp,
+#cpu,
+#memory,
+#custom-netspeed,
+#pulseaudio,
+#tray {
+    padding: 0 9px;
+    color: rgba(160, 160, 180, 0.72);
+}
+
+#custom-gpu,
+#custom-cputemp,
+#cpu,
+#memory,
+#custom-netspeed,
+#pulseaudio {
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#custom-gpu          { color: rgba(120, 195, 120, 0.82); }
+#custom-gpu.warning  { color: rgba(220, 180, 60, 0.9); }
+#custom-gpu.critical { color: rgba(220, 70, 70, 0.95); }
+
+#custom-cputemp          { color: rgba(90, 175, 215, 0.82); }
+#custom-cputemp.warning  { color: rgba(220, 180, 60, 0.9); }
+#custom-cputemp.critical { color: rgba(220, 70, 70, 0.95); }
+
+#cpu             { color: rgba(110, 185, 205, 0.78); }
+#memory          { color: rgba(150, 130, 215, 0.78); }
+#custom-netspeed { color: rgba(130, 195, 150, 0.78); font-size: 12px; }
+#pulseaudio      { color: rgba(170, 160, 195, 0.78); }
+#pulseaudio.muted { color: rgba(155, 65, 65, 0.85); }
+
+#tray { padding: 0 6px; }
+#tray > .passive { -gtk-icon-effect: dim; }
