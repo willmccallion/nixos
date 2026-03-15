@@ -74,7 +74,7 @@ window#waybar {
 /* ── Right modules (shared) ───────────────────────────────────── */
 #custom-gpu,
 #custom-cputemp,
-#cpu,
+#custom-cpu,
 #memory,
 #custom-netspeed,
 #pulseaudio {
@@ -87,7 +87,7 @@ window#waybar {
 
 #custom-gpu:hover,
 #custom-cputemp:hover,
-#cpu:hover,
+#custom-cpu:hover,
 #memory:hover,
 #custom-netspeed:hover,
 #pulseaudio:hover {
@@ -105,8 +105,8 @@ window#waybar {
 #custom-cputemp.warning  { color: rgba(220, 180, 60, 0.9); background: transparent; }
 #custom-cputemp.critical { color: rgba(220, 70, 70, 0.95); background: transparent; }
 
-#cpu             { color: rgba(110, 185, 205, 0.68); }
-#cpu:hover       { color: rgba(110, 185, 205, 1.0); }
+#custom-cpu             { color: rgba(110, 185, 205, 0.68); }
+#custom-cpu:hover       { color: rgba(110, 185, 205, 1.0); }
 
 #memory          { color: rgba(150, 130, 215, 0.68); }
 #memory:hover    { color: rgba(150, 130, 215, 1.0); }

@@ -60,7 +60,7 @@
 			reload = "source ~/.config/fish/config.fish";
 
 			# NixOS management
-			nixswitch = "sudo nixos-rebuild switch --flake ~/.config/nixos#nixos";
+			nixswitch = "sudo nixos-rebuild switch --flake ~/.config/nixos#nix";
 			nixupdate = "sudo nix flake update ~/.config/nixos && nixswitch";
 			nixgc = "sudo nix-collect-garbage -d";
 		};

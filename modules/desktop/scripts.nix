@@ -16,6 +16,10 @@ in
 		# ── Waybar helper scripts ────────────────────────────────────────
 		(pkgs.writeShellScriptBin "waybar-gpu" (builtins.readFile ./scripts/waybar-gpu.sh))
 
+		(mkScript "waybar-cpu" ./scripts/waybar-cpu.sh {
+			awk = "${pkgs.gawk}/bin/awk";
+		})
+
 		(mkScript "waybar-cputemp" ./scripts/waybar-cputemp.sh {
 			sensors = "${pkgs.lm_sensors}/bin/sensors";
 			awk = "${pkgs.gawk}/bin/awk";

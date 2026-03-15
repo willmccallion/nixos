@@ -13,7 +13,7 @@
 	boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
 	# ── Networking ────────────────────────────────────────────────────────
-	networking.hostName = "nixos";
+	networking.hostName = "nix";
 	networking.networkmanager.enable = true;
 
 	# ── Locale ────────────────────────────────────────────────────────────

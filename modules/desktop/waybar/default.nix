@@ -21,7 +21,7 @@
 				modules-center = [ "clock" ];
 				modules-right = [
 					"custom/gpu"
-					"cpu"
+					"custom/cpu"
 					"custom/cputemp"
 					"memory"
 					"custom/netspeed"
@@ -65,10 +65,11 @@
 					interval = 3;
 				};
 
-				cpu = {
-					format = "󰻠 {usage}%";
-					interval = 2;
-					tooltip = false;
+				"custom/cpu" = {
+					exec = "waybar-cpu";
+					return-type = "json";
+					interval = 3;
+					tooltip = true;
 				};
 
 				memory = {

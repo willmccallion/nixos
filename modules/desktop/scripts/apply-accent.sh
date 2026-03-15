@@ -56,11 +56,10 @@ window#waybar {
 
 .modules-left {
     background: rgba(12, 12, 18, 0.78);
-    border-radius: 0 12px 12px 0;
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.07);
-    border-left: none;
-    padding: 0 14px 0 8px;
-    margin: 4px 0;
+    padding: 0 14px 0 10px;
+    margin: 4px 0 4px 6px;
 }
 
 .modules-center {
@@ -73,11 +72,10 @@ window#waybar {
 
 .modules-right {
     background: rgba(12, 12, 18, 0.78);
-    border-radius: 12px 0 0 12px;
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.07);
-    border-right: none;
-    padding: 0 8px 0 14px;
-    margin: 4px 0;
+    padding: 0 10px 0 14px;
+    margin: 4px 6px 4px 0;
 }
 
 #workspaces button {
@@ -131,8 +129,8 @@ window#waybar {
 }
 
 #custom-gpu,
+#custom-cpu,
 #custom-cputemp,
-#cpu,
 #memory,
 #custom-netspeed,
 #pulseaudio {
@@ -146,8 +144,8 @@ window#waybar {
 }
 
 #custom-gpu:hover,
+#custom-cpu:hover,
 #custom-cputemp:hover,
-#cpu:hover,
 #memory:hover,
 #custom-netspeed:hover,
 #pulseaudio:hover {
@@ -159,13 +157,13 @@ window#waybar {
 #custom-gpu.warning  { color: rgba(225, 185, 65, 0.92); background: transparent; }
 #custom-gpu.critical { color: rgba(225, 75, 75, 0.97); background: transparent; }
 
+#custom-cpu          { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 0.72); }
+#custom-cpu:hover    { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 1.0); }
+
 #custom-cputemp          { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 0.78); }
 #custom-cputemp:hover    { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 1.0); }
 #custom-cputemp.warning  { color: rgba(225, 185, 65, 0.92); background: transparent; }
 #custom-cputemp.critical { color: rgba(225, 75, 75, 0.97); background: transparent; }
-
-#cpu             { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 0.72); }
-#cpu:hover       { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 1.0); }
 
 #memory          { color: rgba(${MEM_R}, ${MEM_G}, ${MEM_B}, 0.72); }
 #memory:hover    { color: rgba(${MEM_R}, ${MEM_G}, ${MEM_B}, 1.0); }
@@ -176,6 +174,18 @@ window#waybar {
 #pulseaudio        { color: rgba(${VOL_R}, ${VOL_G}, ${VOL_B}, 0.72); }
 #pulseaudio:hover  { color: rgba(${VOL_R}, ${VOL_G}, ${VOL_B}, 1.0); }
 #pulseaudio.muted  { color: rgba(165, 70, 70, 0.88); }
+
+tooltip {
+    background: rgba(12, 12, 18, 0.92);
+    border: 1px solid rgba(${R}, ${G}, ${B}, 0.18);
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+tooltip label {
+    color: rgba(215, 215, 228, 0.92);
+    font-size: 12px;
+}
 
 #tray { padding: 0 6px; }
 #tray > .passive { -gtk-icon-effect: dim; }

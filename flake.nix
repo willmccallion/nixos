@@ -14,7 +14,7 @@
 
 	outputs = { self, nixpkgs, home-manager, neovim-nightly, ...}:
 	{
-		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.nix = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
 				./configuration.nix
