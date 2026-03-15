@@ -44,6 +44,10 @@
 	programs.gamemode.enable = true;
 	environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
+	# ── Hardware ──────────────────────────────────────────────────────────
+	hardware.bluetooth.enable = true;
+	services.blueman.enable = true;
+
 	# ── Services ──────────────────────────────────────────────────────────
 	services.greetd = {
 		enable = true;
