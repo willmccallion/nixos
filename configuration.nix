@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 	imports = [
 		./hardware-configuration.nix
 		./core.nix
+		./nvidia.nix
 		./modules/desktop/stylix.nix
 	];
 
@@ -20,6 +21,7 @@
 	networking.firewall = {
 		enable = true;
 		allowedTCPPorts = [ ];
+		interfaces."tailscale0".allowedTCPPorts = [ 22 ];
 	};
 
 	# ── Locale ────────────────────────────────────────────────────────────
@@ -35,21 +37,11 @@
 		shell = pkgs.fish;
 	};
 
-	# ── Nvidia ────────────────────────────────────────────────────────────
-	nixpkgs.config.allowUnfree = true;
-	services.xserver.videoDrivers = [ "nvidia" ];
-	hardware.graphics.enable = true;
-	hardware.nvidia = {
-		modesetting.enable = true;
-		open = false;
-		nvidiaSettings = true;
-		package = config.boot.kernelPackages.nvidiaPackages.stable;
-	};
-
 	# ── Programs ──────────────────────────────────────────────────────────
 	programs.steam.enable = true;
 	programs.fish.enable = true;
 	programs.hyprland.enable = true;
+	programs.gamemode.enable = true;
 	environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
 	# ── Services ──────────────────────────────────────────────────────────
@@ -63,16 +55,15 @@
 
 	services.openssh = {
 		enable = true;
-		openFirewall = false;  # firewall manages this below
+		openFirewall = false;  # SSH restricted to tailscale0 via firewall
 		settings = {
 			PasswordAuthentication = false;
 			PermitRootLogin = "no";
 		};
 	};
 
-	# Only allow SSH through the tailscale interface
-	networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 22 ];
 	services.tailscale.enable = true;
+	services.fwupd.enable = true;
 
 	system.stateVersion = "25.11";
 }
