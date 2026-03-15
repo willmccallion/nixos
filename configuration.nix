@@ -56,6 +56,7 @@
 			user = "will";
 		};
 	};
+
 	services.openssh = {
 		enable = true;
 		settings = {

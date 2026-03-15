@@ -11,6 +11,7 @@
 		fd
 		bat
 		eza
+		zoxide
 
 		# Utilities
 		tree
@@ -19,5 +20,8 @@
 		wget
 		curl
 		bc
+		imv
+		unrar
+		p7zip
 	];
 }

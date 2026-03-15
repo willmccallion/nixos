@@ -9,8 +9,6 @@
 		dracula-theme
 		papirus-icon-theme
 		nerd-fonts.caskaydia-cove
-		nerd-fonts.jetbrains-mono
-		nerd-fonts.fira-code
 	];
 
 	gtk = {

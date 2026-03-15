@@ -50,10 +50,6 @@
 			# ── Tabs ──────────────────────────────────────────────────
 			tab_bar_style = "powerline";
 
-			# ── macOS ─────────────────────────────────────────────────
-			macos_titlebar_color = "background";
-			macos_thicken_font = "0.75";
-
 			# ── One Dark colors ───────────────────────────────────────
 			foreground = "#abb2bf";
 			color0 = "#3f4451";

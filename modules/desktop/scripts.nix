@@ -58,7 +58,6 @@ in
 		pkgs.python3
 		pkgs.imagemagick
 		pkgs.lm_sensors
-		pkgs.bc
 		pkgs.iproute2
 		pkgs.gawk
 	];
