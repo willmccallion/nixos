@@ -36,6 +36,12 @@ in
 
 		(pkgs.writeShellScriptBin "toggle-theme" (builtins.readFile ./scripts/toggle-theme.sh))
 
+		(mkScript "apply-wallpaper-theme" ./scripts/apply-wallpaper-theme.sh {
+			python = "${pkgs.python3}/bin/python3";
+			extractAccentPy = ./scripts/extract-accent.py;
+			convert = "${pkgs.imagemagick}/bin/convert";
+		})
+
 		(mkScript "wallpaper-picker" ./scripts/wallpaper-picker.sh {
 			python = "${pkgs.python3}/bin/python3";
 			extractAccentPy = ./scripts/extract-accent.py;

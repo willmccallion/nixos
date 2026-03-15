@@ -1,4 +1,4 @@
-/* ── Square / default mode ─────────────────────────────────── */
+/* ── Square / flat mode ────────────────────────────────────────── */
 * {
     font-family: "CaskaydiaCove Nerd Font", monospace;
     font-size: 13px;
@@ -21,11 +21,12 @@ window#waybar {
     padding: 0 6px;
 }
 
+/* ── Workspaces ───────────────────────────────────────────────── */
 #workspaces button {
     padding: 2px 8px;
     color: rgba(130, 130, 150, 0.5);
     background: transparent;
-    transition: color 0.1s ease;
+    transition: all 0.2s ease;
     font-weight: 400;
 }
 
@@ -43,54 +44,80 @@ window#waybar {
     background: rgba(255, 255, 255, 0.06);
 }
 
+/* ── Window title ─────────────────────────────────────────────── */
 #window {
     color: rgba(150, 150, 170, 0.5);
     font-size: 12px;
     padding: 0 4px;
     font-style: italic;
+    transition: color 0.3s ease;
 }
 
+#window:hover {
+    color: rgba(200, 200, 220, 0.80);
+}
+
+/* ── Clock ────────────────────────────────────────────────────── */
 #clock {
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.05em;
     color: rgba(225, 225, 240, 0.97);
     padding: 0 16px;
+    transition: color 0.3s ease;
 }
 
-#custom-gpu,
-#custom-cputemp,
-#cpu,
-#memory,
-#custom-netspeed,
-#pulseaudio,
-#tray {
-    padding: 0 9px;
-    color: rgba(160, 160, 180, 0.72);
+#clock:hover {
+    color: rgba(255, 255, 255, 1.0);
 }
 
+/* ── Right modules (shared) ───────────────────────────────────── */
 #custom-gpu,
 #custom-cputemp,
 #cpu,
 #memory,
 #custom-netspeed,
 #pulseaudio {
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0 9px;
+    transition: all 0.25s ease;
+    background: transparent;
+    background-color: transparent;
+    background-image: none;
 }
 
-#custom-gpu          { color: rgba(120, 195, 120, 0.82); }
-#custom-gpu.warning  { color: rgba(220, 180, 60, 0.9); }
-#custom-gpu.critical { color: rgba(220, 70, 70, 0.95); }
+#custom-gpu:hover,
+#custom-cputemp:hover,
+#cpu:hover,
+#memory:hover,
+#custom-netspeed:hover,
+#pulseaudio:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
 
-#custom-cputemp          { color: rgba(90, 175, 215, 0.82); }
-#custom-cputemp.warning  { color: rgba(220, 180, 60, 0.9); }
-#custom-cputemp.critical { color: rgba(220, 70, 70, 0.95); }
+/* ── Module colors ────────────────────────────────────────────── */
+#custom-gpu          { color: rgba(120, 195, 120, 0.72); }
+#custom-gpu:hover    { color: rgba(120, 195, 120, 1.0); }
+#custom-gpu.warning  { color: rgba(220, 180, 60, 0.9); background: transparent; }
+#custom-gpu.critical { color: rgba(220, 70, 70, 0.95); background: transparent; }
 
-#cpu             { color: rgba(110, 185, 205, 0.78); }
-#memory          { color: rgba(150, 130, 215, 0.78); }
-#custom-netspeed { color: rgba(130, 195, 150, 0.78); font-size: 12px; }
-#pulseaudio      { color: rgba(170, 160, 195, 0.78); }
-#pulseaudio.muted { color: rgba(155, 65, 65, 0.85); }
+#custom-cputemp          { color: rgba(90, 175, 215, 0.72); }
+#custom-cputemp:hover    { color: rgba(90, 175, 215, 1.0); }
+#custom-cputemp.warning  { color: rgba(220, 180, 60, 0.9); background: transparent; }
+#custom-cputemp.critical { color: rgba(220, 70, 70, 0.95); background: transparent; }
 
+#cpu             { color: rgba(110, 185, 205, 0.68); }
+#cpu:hover       { color: rgba(110, 185, 205, 1.0); }
+
+#memory          { color: rgba(150, 130, 215, 0.68); }
+#memory:hover    { color: rgba(150, 130, 215, 1.0); }
+
+#custom-netspeed       { color: rgba(130, 195, 150, 0.68); font-size: 12px; }
+#custom-netspeed:hover { color: rgba(130, 195, 150, 1.0); }
+
+#pulseaudio        { color: rgba(170, 160, 195, 0.68); }
+#pulseaudio:hover  { color: rgba(170, 160, 195, 1.0); }
+#pulseaudio.muted  { color: rgba(155, 65, 65, 0.85); }
+
+/* ── Tray ─────────────────────────────────────────────────────── */
 #tray { padding: 0 6px; }
 #tray > .passive { -gtk-icon-effect: dim; }

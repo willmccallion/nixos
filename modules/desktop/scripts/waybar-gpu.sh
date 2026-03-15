@@ -6,7 +6,7 @@ data=$(nvidia-smi \
 	--format=csv,noheader,nounits 2>/dev/null)
 
 if [ -z "$data" ]; then
-	echo '{"text": "GPU N/A", "tooltip": "No GPU found", "class": "normal"}'
+	echo '{"text": "󰢮 --", "tooltip": "No GPU found", "class": "normal"}'
 	exit 0
 fi
 
@@ -22,7 +22,7 @@ class="normal"
 [ "$temp" -ge 70 ] && class="warning"
 [ "$temp" -ge 85 ] && class="critical"
 
-tooltip="${name} | Util: ${util}% | VRAM: ${mem_used}/${mem_total} MiB | Temp: ${temp}°C | Power: ${power}W"
+tooltip="${name}\nUtil: ${util}%\nVRAM: ${mem_used}/${mem_total} MiB\nTemp: ${temp}°C\nPower: ${power}W"
 
-printf '{"text": "[GPU %s%%  %s°C]", "tooltip": "%s", "class": "%s"}\n' \
+printf '{"text": "󰢮 %s%%  %s°C", "tooltip": "%s", "class": "%s"}\n' \
 	"$util" "$temp" "$tooltip" "$class"

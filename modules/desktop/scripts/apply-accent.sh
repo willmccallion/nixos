@@ -34,6 +34,9 @@ read -r \
 	<<< "$(@python@ @hueShiftPy@ "$R" "$G" "$B")"
 
 # ── Regenerate waybar rounded CSS ────────────────────────────
+# Remove nix store symlinks if present (home-manager creates these)
+[ -L "$WAYBAR_DIR/style-rounded.css" ] && rm -f "$WAYBAR_DIR/style-rounded.css"
+[ -L "$WAYBAR_DIR/style.css" ] && rm -f "$WAYBAR_DIR/style.css"
 cat > "$WAYBAR_DIR/style-rounded.css" << CSSEOF
 /* ── Rounded / Hyprland pill mode (auto-generated) ─────────── */
 * {
@@ -82,7 +85,7 @@ window#waybar {
     color: rgba(${DIM_R}, ${DIM_G}, ${DIM_B}, 0.65);
     background: transparent;
     border-radius: 8px;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     font-weight: 400;
     margin: 0 1px;
 }
@@ -107,6 +110,11 @@ window#waybar {
     font-size: 12px;
     padding: 0 4px;
     font-style: italic;
+    transition: color 0.3s ease;
+}
+
+#window:hover {
+    color: rgba(${R}, ${G}, ${B}, 0.80);
 }
 
 #clock {
@@ -115,6 +123,11 @@ window#waybar {
     letter-spacing: 0.05em;
     color: rgba(${R}, ${G}, ${B}, 0.97);
     padding: 0 4px;
+    transition: color 0.3s ease;
+}
+
+#clock:hover {
+    color: rgba(255, 255, 255, 1.0);
 }
 
 #custom-gpu,
@@ -122,28 +135,54 @@ window#waybar {
 #cpu,
 #memory,
 #custom-netspeed,
-#pulseaudio,
-#tray {
-    padding: 0 8px;
+#pulseaudio {
+    padding: 0 10px;
+    border-radius: 6px;
+    margin: 3px 1px;
+    transition: all 0.25s ease;
+    background: transparent;
+    background-color: transparent;
+    background-image: none;
 }
 
-#custom-gpu          { color: rgba(${GPU_R}, ${GPU_G}, ${GPU_B}, 0.90); }
-#custom-gpu.warning  { color: rgba(225, 185, 65, 0.92); }
-#custom-gpu.critical { color: rgba(225, 75, 75, 0.97); }
+#custom-gpu:hover,
+#custom-cputemp:hover,
+#cpu:hover,
+#memory:hover,
+#custom-netspeed:hover,
+#pulseaudio:hover {
+    background: rgba(${R}, ${G}, ${B}, 0.08);
+}
 
-#custom-cputemp          { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 0.88); }
-#custom-cputemp.warning  { color: rgba(225, 185, 65, 0.92); }
-#custom-cputemp.critical { color: rgba(225, 75, 75, 0.97); }
+#custom-gpu          { color: rgba(${GPU_R}, ${GPU_G}, ${GPU_B}, 0.82); }
+#custom-gpu:hover    { color: rgba(${GPU_R}, ${GPU_G}, ${GPU_B}, 1.0); }
+#custom-gpu.warning  { color: rgba(225, 185, 65, 0.92); background: transparent; }
+#custom-gpu.critical { color: rgba(225, 75, 75, 0.97); background: transparent; }
 
-#cpu             { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 0.80); }
-#memory          { color: rgba(${MEM_R}, ${MEM_G}, ${MEM_B}, 0.82); }
-#custom-netspeed { color: rgba(${NET_R}, ${NET_G}, ${NET_B}, 0.82); font-size: 12px; }
-#pulseaudio      { color: rgba(${VOL_R}, ${VOL_G}, ${VOL_B}, 0.82); }
-#pulseaudio.muted { color: rgba(165, 70, 70, 0.88); }
+#custom-cputemp          { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 0.78); }
+#custom-cputemp:hover    { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 1.0); }
+#custom-cputemp.warning  { color: rgba(225, 185, 65, 0.92); background: transparent; }
+#custom-cputemp.critical { color: rgba(225, 75, 75, 0.97); background: transparent; }
+
+#cpu             { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 0.72); }
+#cpu:hover       { color: rgba(${CPU_R}, ${CPU_G}, ${CPU_B}, 1.0); }
+
+#memory          { color: rgba(${MEM_R}, ${MEM_G}, ${MEM_B}, 0.72); }
+#memory:hover    { color: rgba(${MEM_R}, ${MEM_G}, ${MEM_B}, 1.0); }
+
+#custom-netspeed       { color: rgba(${NET_R}, ${NET_G}, ${NET_B}, 0.72); font-size: 12px; }
+#custom-netspeed:hover { color: rgba(${NET_R}, ${NET_G}, ${NET_B}, 1.0); }
+
+#pulseaudio        { color: rgba(${VOL_R}, ${VOL_G}, ${VOL_B}, 0.72); }
+#pulseaudio:hover  { color: rgba(${VOL_R}, ${VOL_G}, ${VOL_B}, 1.0); }
+#pulseaudio.muted  { color: rgba(165, 70, 70, 0.88); }
 
 #tray { padding: 0 6px; }
 #tray > .passive { -gtk-icon-effect: dim; }
 CSSEOF
+
+	# Copy to style.css so waybar reads the updated version
+	cp "$WAYBAR_DIR/style-rounded.css" "$WAYBAR_DIR/style.css"
 
 	# Reload waybar CSS if running
 	pkill -SIGUSR2 waybar 2>/dev/null || true

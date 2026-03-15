@@ -41,12 +41,13 @@ window#waybar {
     margin: 4px 0;
 }
 
+/* ── Workspaces ───────────────────────────────────────────────── */
 #workspaces button {
     padding: 2px 9px;
     color: rgba(126, 126, 127, 0.65);
     background: transparent;
     border-radius: 8px;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     font-weight: 400;
     margin: 0 1px;
 }
@@ -66,44 +67,82 @@ window#waybar {
     background: rgba(255, 255, 255, 0.08);
 }
 
+/* ── Window title ─────────────────────────────────────────────── */
 #window {
     color: rgba(126, 126, 127, 0.50);
     font-size: 12px;
     padding: 0 4px;
     font-style: italic;
+    transition: color 0.3s ease;
 }
 
+#window:hover {
+    color: rgba(185, 185, 195, 0.80);
+}
+
+/* ── Clock ────────────────────────────────────────────────────── */
 #clock {
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.05em;
     color: rgba(185, 185, 195, 0.97);
     padding: 0 4px;
+    transition: color 0.3s ease;
 }
 
+#clock:hover {
+    color: rgba(255, 255, 255, 1.0);
+}
+
+/* ── Right modules (shared) ───────────────────────────────────── */
 #custom-gpu,
 #custom-cputemp,
 #cpu,
 #memory,
 #custom-netspeed,
-#pulseaudio,
-#tray {
-    padding: 0 8px;
+#pulseaudio {
+    padding: 0 10px;
+    border-radius: 6px;
+    margin: 3px 1px;
+    transition: all 0.25s ease;
+    background: transparent;
+    background-color: transparent;
+    background-image: none;
 }
 
-#custom-gpu          { color: rgba(212, 212, 216, 0.90); }
-#custom-gpu.warning  { color: rgba(225, 185, 65, 0.92); }
-#custom-gpu.critical { color: rgba(225, 75, 75, 0.97); }
+#custom-gpu:hover,
+#custom-cputemp:hover,
+#cpu:hover,
+#memory:hover,
+#custom-netspeed:hover,
+#pulseaudio:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
 
-#custom-cputemp          { color: rgba(180, 180, 183, 0.88); }
-#custom-cputemp.warning  { color: rgba(225, 185, 65, 0.92); }
-#custom-cputemp.critical { color: rgba(225, 75, 75, 0.97); }
+/* ── Module colors ────────────────────────────────────────────── */
+#custom-gpu          { color: rgba(212, 212, 216, 0.82); }
+#custom-gpu:hover    { color: rgba(212, 212, 216, 1.0); }
+#custom-gpu.warning  { color: rgba(225, 185, 65, 0.92); background: transparent; }
+#custom-gpu.critical { color: rgba(225, 75, 75, 0.97); background: transparent; }
 
-#cpu             { color: rgba(180, 180, 183, 0.80); }
-#memory          { color: rgba(155, 155, 158, 0.82); }
-#custom-netspeed { color: rgba(196, 196, 198, 0.82); font-size: 12px; }
-#pulseaudio      { color: rgba(171, 171, 173, 0.82); }
-#pulseaudio.muted { color: rgba(165, 70, 70, 0.88); }
+#custom-cputemp          { color: rgba(180, 180, 183, 0.78); }
+#custom-cputemp:hover    { color: rgba(180, 180, 183, 1.0); }
+#custom-cputemp.warning  { color: rgba(225, 185, 65, 0.92); background: transparent; }
+#custom-cputemp.critical { color: rgba(225, 75, 75, 0.97); background: transparent; }
 
+#cpu             { color: rgba(180, 180, 183, 0.72); }
+#cpu:hover       { color: rgba(180, 180, 183, 1.0); }
+
+#memory          { color: rgba(155, 155, 158, 0.72); }
+#memory:hover    { color: rgba(155, 155, 158, 1.0); }
+
+#custom-netspeed       { color: rgba(196, 196, 198, 0.72); font-size: 12px; }
+#custom-netspeed:hover { color: rgba(196, 196, 198, 1.0); }
+
+#pulseaudio        { color: rgba(171, 171, 173, 0.72); }
+#pulseaudio:hover  { color: rgba(171, 171, 173, 1.0); }
+#pulseaudio.muted  { color: rgba(165, 70, 70, 0.88); }
+
+/* ── Tray ─────────────────────────────────────────────────────── */
 #tray { padding: 0 6px; }
 #tray > .passive { -gtk-icon-effect: dim; }
