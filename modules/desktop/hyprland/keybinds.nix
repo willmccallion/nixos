@@ -13,9 +13,11 @@
 			"$mainMod, P, togglefloating"
 			"$mainMod, D, exec, $menu"
 			"$mainMod, F, fullscreen"
-			"$mainMod, Z, exec, zen-browser"
+			"$mainMod, Z, exec, firefox"
 			"$mainMod, X, exec, kitty --class btop-float btop"
 			"$mainMod, Q, exec, kitty --class claude-float --directory ~/projects fish -c claude"
+
+			"$mainMod, SPACE, exec, $menu"
 
 			# ── Theming ───────────────────────────────────────────
 			"$mainMod, B, exec, toggle-theme"
