@@ -64,25 +64,8 @@ splash = false
 			"$menu" = "wofi --show drun";
 			"$mainMod" = "Alt_L";
 
-			# ── Monitors ──────────────────────────────────────────────
-			monitor = [
-				"HDMI-A-1, 1920x1080@60, 0x0, 1"    # HP 27w  (left)
-				"HDMI-A-2, 1920x1080@60, 1920x0, 1"  # OMEN 27 (right)
-			];
-
-			# ── Workspace → monitor binding ───────────────────────────
-			workspace = [
-				"1, monitor:HDMI-A-1, default:true"
-				"2, monitor:HDMI-A-1"
-				"3, monitor:HDMI-A-1"
-				"4, monitor:HDMI-A-1"
-				"5, monitor:HDMI-A-1"
-				"6, monitor:HDMI-A-2, default:true"
-				"7, monitor:HDMI-A-2"
-				"8, monitor:HDMI-A-2"
-				"9, monitor:HDMI-A-2"
-				"10, monitor:HDMI-A-2"
-			];
+			# ── Monitors (auto-detect) ────────────────────────────────
+			monitor = ", preferred, auto, 1";
 
 			# ── Autostart ─────────────────────────────────────────────
 			exec-once = [
@@ -100,7 +83,6 @@ splash = false
 				"GDK_BACKEND, wayland,x11"
 				"__GLX_VENDOR_LIBRARY_NAME, nvidia"
 			];
-
 
 			# ── General ───────────────────────────────────────────────
 			general = {
