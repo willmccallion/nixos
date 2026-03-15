@@ -20,9 +20,14 @@
 	};
 
 	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, rust-overlay, ...}:
+	let
+		username = "will";
+		hostname = "nix";
+	in
 	{
-		nixosConfigurations.nix = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
+			specialArgs = { inherit username hostname; };
 			modules = [
 				./configuration.nix
 				stylix.nixosModules.stylix
@@ -35,7 +40,8 @@
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
 					home-manager.backupFileExtension = "backup";
-					home-manager.users.will = import ./home.nix;
+					home-manager.extraSpecialArgs = { inherit username; };
+					home-manager.users.${username} = import ./home.nix;
 				}
 			];
 		};

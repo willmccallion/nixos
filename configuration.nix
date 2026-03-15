@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, hostname, ... }:
 
 {
 	imports = [
@@ -16,7 +16,7 @@
 	boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
 	# ── Networking ────────────────────────────────────────────────────────
-	networking.hostName = "nix";
+	networking.hostName = hostname;
 	networking.networkmanager.enable = true;
 	networking.firewall = {
 		enable = true;
@@ -30,7 +30,7 @@
 	services.xserver.xkb.layout = "us";
 
 	# ── User ──────────────────────────────────────────────────────────────
-	users.users.will = {
+	users.users.${username} = {
 		isNormalUser = true;
 		description = "Will McCallion";
 		extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" ];
@@ -53,7 +53,7 @@
 		enable = true;
 		settings.default_session = {
 			command = "start-hyprland";
-			user = "will";
+			user = username;
 		};
 	};
 

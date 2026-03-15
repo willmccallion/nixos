@@ -1,7 +1,7 @@
 ## ── Home Manager ──────────────────────────────────────────────────────────────
 ## Entry point for user-level configuration.
 ## Each module category can be commented out independently.
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 {
 	imports = [
@@ -12,8 +12,8 @@
 		./modules/shell    # Fish, Tmux
 	];
 
-	home.username = "will";
-	home.homeDirectory = "/home/will";
+	home.username = username;
+	home.homeDirectory = "/home/${username}";
 	home.stateVersion = "25.11";
 
 	home.sessionVariables = {
