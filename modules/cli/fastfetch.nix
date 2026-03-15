@@ -75,8 +75,13 @@
 			}
 			{
 				type = "disk";
-				key = "disk";
+				key = "nvme";
 				folders = "/";
+			}
+			{
+				type = "disk";
+				key = "sda";
+				folders = "/data";
 			}
 			{
 				type = "uptime";

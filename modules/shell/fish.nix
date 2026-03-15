@@ -66,6 +66,12 @@
 			nixswitch = "sudo nixos-rebuild switch --flake ~/.config/nixos#nix";
 			nixupdate = "sudo nix flake update ~/.config/nixos && nixswitch";
 			nixgc = "sudo nix-collect-garbage -d";
+
+			# Nix shell
+			ns = "nix-shell -p";
+			nixsearch = "nix search nixpkgs";
+			nixrun = "nix run nixpkgs#";
+			nixdev = "nix develop";
 		};
 
 		# ── Abbreviations (auto-expanding) ─────────────────────────────────

@@ -56,6 +56,14 @@
 			user = "will";
 		};
 	};
+	services.openssh = {
+		enable = true;
+		settings = {
+			PasswordAuthentication = false;
+			PermitRootLogin = "no";
+		};
+	};
+	services.tailscale.enable = true;
 
 	system.stateVersion = "25.11";
 }

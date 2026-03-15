@@ -43,11 +43,11 @@
 
 		# Interactive file content search with ripgrep + fzf → open in nvim
 		fif = ''
-			test (count $argv) -eq 0 && echo "Usage: fif <query>" && return 1
-			set match (rg --color=always --line-number --no-heading -F "$argv" \
-				| fzf --ansi --delimiter ':' \
-					--preview "bat --color=always --highlight-line {2} {1}" \
-					--preview-window '+{2}/2')
+			set match (fzf --ansi --disabled \
+				--bind "change:reload:rg --color=always --line-number --no-heading -- {q} || true" \
+				--delimiter ':' \
+				--preview "test -n {1} && bat --color=always --highlight-line {2} {1}" \
+				--preview-window '+{2}/2')
 			test -z "$match" && return
 			set file (echo $match | cut -d':' -f1)
 			set line (echo $match | cut -d':' -f2)

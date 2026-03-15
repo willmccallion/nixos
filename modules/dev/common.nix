@@ -8,6 +8,7 @@
 		gdb
 		lldb
 		claude-code
+		tokei
 	];
 
 	programs.git = {
