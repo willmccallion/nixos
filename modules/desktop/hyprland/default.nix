@@ -3,7 +3,7 @@
 ## Dual monitor, dwindle layout, full animations, nvidia env vars.
 ## Dynamic theming via toggle-theme (Alt+B) and wallpaper picker (Alt+W).
 ## Remove this import from desktop/default.nix to disable.
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 	home.pointerCursor = {
@@ -43,12 +43,14 @@
 		fi
 	'';
 
-	xdg.configFile."hypr/hyprpaper.conf".text = ''
-preload = /home/will/.config/hypr/background.jpg
+	xdg.configFile."hypr/hyprpaper.conf".text = let
+		bg = "${config.home.homeDirectory}/.config/hypr/background.jpg";
+	in ''
+preload = ${bg}
 
 wallpaper {
     monitor =
-    path = /home/will/.config/hypr/background.jpg
+    path = ${bg}
 }
 
 splash = false

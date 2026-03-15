@@ -2,6 +2,7 @@
 
 {
 	home.packages = with pkgs; [
+		neovim
 		gh
 		gnumake
 		gdb
@@ -17,5 +18,10 @@
 			init.defaultBranch = "main";
 			push.autoSetupRemote = true;
 		};
+	};
+
+	programs.direnv = {
+		enable = true;
+		nix-direnv.enable = true;
 	};
 }

@@ -37,17 +37,8 @@
 
 		# ── Environment variables ──────────────────────────────────────────
 		shellInit = ''
-			set -gx EDITOR nvim
-			set -gx VISUAL nvim
-
 			fish_add_path ~/.cargo/bin
 			fish_add_path ~/.local/bin
-
-			# Wayland
-			if not set -q WAYLAND_DISPLAY
-				set -gx WAYLAND_DISPLAY wayland-1
-			end
-			set -gx XDG_RUNTIME_DIR /run/user/(id -u)
 		'';
 
 		# ── Aliases ────────────────────────────────────────────────────────
