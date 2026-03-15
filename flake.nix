@@ -10,14 +10,17 @@
 		};
 
 		neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
+		stylix.url = "github:danth/stylix";
 	};
 
-	outputs = { self, nixpkgs, home-manager, neovim-nightly, ...}:
+	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, ...}:
 	{
 		nixosConfigurations.nix = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
 				./configuration.nix
+				stylix.nixosModules.stylix
 				home-manager.nixosModules.home-manager
 				{
 					nixpkgs.overlays = [ neovim-nightly.overlays.default ];

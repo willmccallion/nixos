@@ -265,6 +265,13 @@ THEMEEOF
 	DIM_HEX=$(printf "%02x%02x%02x" "$DIM_R" "$DIM_G" "$DIM_B")
 	SEL_HEX=$(printf "%02x%02x%02x" "$ACC_DIM_R" "$ACC_DIM_G" "$ACC_DIM_B")
 
+	# ── Apply kitty background tint ─────────────────────────────
+	BG_R=$(( R * 8 / 100 )); BG_G=$(( G * 8 / 100 )); BG_B=$(( B * 8 / 100 ))
+	KITTY_BG=$(printf "#%02x%02x%02x" "$BG_R" "$BG_G" "$BG_B")
+	for sock in /tmp/kitty-socket*; do
+		[ -S "$sock" ] && @kitty@ @ --to "unix:$sock" set-colors background="$KITTY_BG" 2>/dev/null || true
+	done
+
 	@fish@ -c "
 set -U fish_color_user $FISH_HEX
 set -U fish_color_host $CPU_HEX

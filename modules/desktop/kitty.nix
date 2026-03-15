@@ -30,6 +30,10 @@
 			cursor_shape = "beam";
 			cursor_blink_interval = 0;
 
+			# ── Remote control (for dynamic theming) ──────────────────
+			allow_remote_control = "socket-only";
+			listen_on = "unix:/tmp/kitty-socket";
+
 			# ── Behavior ──────────────────────────────────────────────
 			scrollback_lines = 2000;
 			confirm_os_window_close = 0;

@@ -36,6 +36,7 @@ in
 			python = "${pkgs.python3}/bin/python3";
 			hueShiftPy = ./scripts/hue-shift.py;
 			fish = "${pkgs.fish}/bin/fish";
+			kitty = "${pkgs.kitty}/bin/kitty";
 		})
 
 		(pkgs.writeShellScriptBin "toggle-theme" (builtins.readFile ./scripts/toggle-theme.sh))
