@@ -17,6 +17,10 @@
 	# ── Networking ────────────────────────────────────────────────────────
 	networking.hostName = "nix";
 	networking.networkmanager.enable = true;
+	networking.firewall = {
+		enable = true;
+		allowedTCPPorts = [ ];
+	};
 
 	# ── Locale ────────────────────────────────────────────────────────────
 	time.timeZone = "America/Edmonton";
@@ -59,11 +63,15 @@
 
 	services.openssh = {
 		enable = true;
+		openFirewall = false;  # firewall manages this below
 		settings = {
 			PasswordAuthentication = false;
 			PermitRootLogin = "no";
 		};
 	};
+
+	# Only allow SSH through the tailscale interface
+	networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 22 ];
 	services.tailscale.enable = true;
 
 	system.stateVersion = "25.11";

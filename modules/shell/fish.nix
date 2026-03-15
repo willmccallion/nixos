@@ -64,7 +64,7 @@
 
 			# NixOS management
 			nixswitch = "sudo nixos-rebuild switch --flake ~/.config/nixos#nix";
-			nixupdate = "sudo nix flake update ~/.config/nixos && nixswitch";
+			nixupdate = "sudo nix flake update --flake ~/.config/nixos && nixswitch";
 			nixgc = "sudo nix-collect-garbage -d";
 
 			# Nix shell
