@@ -12,7 +12,12 @@ if [ -f /tmp/waybar-accent ]; then
 	read -r R G B < /tmp/waybar-accent
 else
 	read -r R G B <<< "$(@python@ @extractAccentPy@ "$BG" "@convert@")"
-	echo "$R $G $B" > /tmp/waybar-accent
 fi
+
+# Validate; fall back to cool silver if extraction failed
+if ! [[ "$R" =~ ^[0-9]+$ && "$G" =~ ^[0-9]+$ && "$B" =~ ^[0-9]+$ ]]; then
+	R=185; G=185; B=195
+fi
+echo "$R $G $B" > /tmp/waybar-accent
 
 apply-accent "$R" "$G" "$B"

@@ -5,6 +5,11 @@
 
 R=$1; G=$2; B=$3
 
+# Validate: must be non-empty integers; fall back to cool silver
+if ! [[ "$R" =~ ^[0-9]+$ && "$G" =~ ^[0-9]+$ && "$B" =~ ^[0-9]+$ ]]; then
+	R=185; G=185; B=195
+fi
+
 WAYBAR_DIR="$HOME/.config/waybar"
 HEX=$(printf "%02x%02x%02x" "$R" "$G" "$B")
 

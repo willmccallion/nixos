@@ -10,5 +10,6 @@
 		./wofi.nix      # Application launcher
 		./theme.nix     # GTK/Qt theming, icons, fonts
 		./scripts.nix   # Dynamic theming scripts (wallpaper, toggle-theme, apply-accent)
+		./gammastep.nix # Night light (warm screen colour at night)
 	];
 }
