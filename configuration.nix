@@ -69,5 +69,13 @@
 	services.tailscale.enable = true;
 	services.fwupd.enable = true;
 
+	services.syncthing = {
+		enable = true;
+		user = username;
+		group = "users";
+		dataDir = "/home/${username}";
+		openDefaultPorts = true;
+	};
+
 	system.stateVersion = "25.11";
 }
