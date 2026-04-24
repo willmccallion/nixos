@@ -14,10 +14,7 @@
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.systemd-boot.configurationLimit = 3;
 	boot.loader.efi.canTouchEfiVariables = true;
-	# systemd-based initrd: caches the LUKS passphrase across devices, so a
-	# single prompt unlocks both cryptroot and cryptdata when they share one.
 	boot.initrd.systemd.enable = true;
-	# /tmp in RAM: faster Nix builds and less SSD write wear. Safe with ≥16 GB.
 	boot.tmp.useTmpfs = true;
 	boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
@@ -41,11 +38,7 @@
 		description = "Will McCallion";
 		extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" ];
 		shell = pkgs.fish;
-		# First-boot password — change immediately with `passwd` after login.
-		# Only used if no password has been set yet; subsequent rebuilds ignore.
 		initialPassword = "changeme";
-		# SSH keys authorized to log in as `will` (over tailscale0 only; see
-		# firewall config below). Add new client pubkeys here to grant access.
 		openssh.authorizedKeys.keys = [
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8l13MYCP0NBgj4OdV/Yxc1YCCQI9j81rknKYGUjsvn will.mccallion@icloud.com"
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAdh4ujrVDPyEW393tSW0AbM29Yn5H96SjLG+2FSuj76 will.mccallion@icloud.com"
@@ -74,7 +67,7 @@
 
 	services.openssh = {
 		enable = true;
-		openFirewall = false;  # SSH restricted to tailscale0 via firewall
+		openFirewall = false;
 		settings = {
 			PasswordAuthentication = false;
 			PermitRootLogin = "no";
@@ -91,7 +84,6 @@
 		dataDir = "/home/${username}";
 		openDefaultPorts = true;
 
-		# Declarative peers/folders — web UI edits get overridden on rebuild.
 		overrideDevices = true;
 		overrideFolders = true;
 

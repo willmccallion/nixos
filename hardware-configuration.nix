@@ -1,6 +1,3 @@
-# Hardware config.
-# Filesystems, LUKS devices, and subvolume layout are declared in ./disko.nix.
-# Keep this file limited to kernel modules and CPU-specific hardware bits.
 { config, lib, pkgs, modulesPath, ... }:
 
 {

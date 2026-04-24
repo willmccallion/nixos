@@ -62,10 +62,10 @@
 			conff = "nvim ~/.nixos/modules/shell/fish.nix";
 			reload = "source ~/.config/fish/config.fish";
 
-			# NixOS management (uses nh — flake path is set in core.nix).
-			nix-switch = "sudo nh os switch";           # rebuild + activate
-			nix-update = "sudo nh os switch --update"; # bump flake inputs, then rebuild
-			nix-gc     = "sudo nh clean all";          # GC per core.nix retention policy
+			# NixOS management
+			nix-switch = "sudo nh os switch";
+			nix-update = "sudo nh os switch --update";
+			nix-gc     = "sudo nh clean all";
 
 			# Nix shell
 			ns = "nix-shell -p";
