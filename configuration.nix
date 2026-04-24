@@ -41,6 +41,9 @@
 		description = "Will McCallion";
 		extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" ];
 		shell = pkgs.fish;
+		# First-boot password — change immediately with `passwd` after login.
+		# Only used if no password has been set yet; subsequent rebuilds ignore.
+		initialPassword = "changeme";
 	};
 
 	# ── Programs ──────────────────────────────────────────────────────────
