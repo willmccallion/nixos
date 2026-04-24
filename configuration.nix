@@ -90,6 +90,22 @@
 		group = "users";
 		dataDir = "/home/${username}";
 		openDefaultPorts = true;
+
+		# Declarative peers/folders — web UI edits get overridden on rebuild.
+		overrideDevices = true;
+		overrideFolders = true;
+
+		settings = {
+			devices.macbook = {
+				id = "RGGTC2E-DKEYTPV-GGQZB4Q-JHPMDIQ-6WO77SY-IQ4E3BX-7DEHBFK-NR74TAH";
+			};
+			folders."6pkzo-6jk7s" = {
+				label = "school-notes";
+				path = "/home/${username}/school/notes";
+				devices = [ "macbook" ];
+				type = "sendreceive";
+			};
+		};
 	};
 
 	system.stateVersion = "25.11";
