@@ -36,7 +36,7 @@
 	users.users.${username} = {
 		isNormalUser = true;
 		description = "Will McCallion";
-		extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" ];
+		extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" "docker" ];
 		shell = pkgs.fish;
 		initialPassword = "changeme";
 		openssh.authorizedKeys.keys = [
@@ -73,6 +73,8 @@
 			PermitRootLogin = "no";
 		};
 	};
+
+	virtualisation.docker.enable = true;
 
 	services.tailscale.enable = true;
 	services.fwupd.enable = true;

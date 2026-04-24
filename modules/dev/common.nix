@@ -10,6 +10,7 @@
 		claude-code
 		tokei
 		qemu
+		docker-compose
 	];
 
 	programs.git = {
