@@ -68,7 +68,10 @@ splash = false
 			"$menu" = "wofi --show drun";
 			"$mainMod" = "Alt_L";
 
-			monitor = ", preferred, auto, 1";
+			monitor = [
+				"HDMI-A-1, preferred, 0x0, 1"
+				"HDMI-A-2, preferred, 1920x0, 1"
+			];
 
 			exec-once = [
 				"hyprpaper"
