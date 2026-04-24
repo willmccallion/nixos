@@ -6,6 +6,7 @@
 		./core.nix
 		./nvidia.nix
 		./modules/desktop/stylix.nix
+		./modules/dev/compat.nix
 	];
 
 	# ── Boot ──────────────────────────────────────────────────────────────
