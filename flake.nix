@@ -13,11 +13,6 @@
 
 		stylix.url = "github:danth/stylix";
 
-		rust-overlay = {
-			url = "github:oxalica/rust-overlay";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-
 		disko = {
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +24,7 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, rust-overlay, disko, nix-index-database, ...}:
+	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, disko, nix-index-database, ...}:
 	let
 		username = "will";
 		hostname = "nix";
@@ -47,7 +42,6 @@
 				{
 					nixpkgs.overlays = [
 						neovim-nightly.overlays.default
-						rust-overlay.overlays.default
 					];
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
