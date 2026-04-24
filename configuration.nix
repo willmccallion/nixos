@@ -60,7 +60,7 @@
 	services.greetd = {
 		enable = true;
 		settings.default_session = {
-			command = "Hyprland";
+			command = "start-hyprland";
 			user = username;
 		};
 	};
