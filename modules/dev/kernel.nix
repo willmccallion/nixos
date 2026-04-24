@@ -8,5 +8,6 @@
 		elfutils
 		openssl
 		bc
+		glibc.static
 	];
 }

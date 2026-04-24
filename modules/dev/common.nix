@@ -9,6 +9,7 @@
 		lldb
 		claude-code
 		tokei
+		qemu
 	];
 
 	programs.git = {
