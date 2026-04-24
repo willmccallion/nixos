@@ -7,13 +7,13 @@
 		./nvidia.nix
 		./modules/desktop/stylix.nix
 		./modules/dev/compat.nix
+		./backup.nix
 	];
 
 	# ── Boot ──────────────────────────────────────────────────────────────
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.systemd-boot.configurationLimit = 3;
 	boot.loader.efi.canTouchEfiVariables = true;
-	boot.loader.efi.efiSysMountPoint = "/boot/efi";
 	boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
 	# ── Networking ────────────────────────────────────────────────────────

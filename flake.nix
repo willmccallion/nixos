@@ -17,9 +17,14 @@
 			url = "github:oxalica/rust-overlay";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+
+		disko = {
+			url = "github:nix-community/disko";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, rust-overlay, ...}:
+	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, rust-overlay, disko, ...}:
 	let
 		username = "will";
 		hostname = "nix";
@@ -30,6 +35,8 @@
 			specialArgs = { inherit username hostname; };
 			modules = [
 				./configuration.nix
+				disko.nixosModules.disko
+				./disko.nix
 				stylix.nixosModules.stylix
 				home-manager.nixosModules.home-manager
 				{
