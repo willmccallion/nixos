@@ -18,6 +18,13 @@
 		"d /data/backup     0755 root root -"
 	];
 
+	# Monthly btrfs scrub on all btrfs filesystems — catches silent bit rot
+	# before it can destroy backups (especially relevant for the spinning HDD).
+	services.btrfs.autoScrub = {
+		enable = true;
+		interval = "monthly";
+	};
+
 	services.btrbk.instances.home = {
 		onCalendar = "daily";
 		settings = {

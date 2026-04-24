@@ -22,9 +22,14 @@
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+
+		nix-index-database = {
+			url = "github:nix-community/nix-index-database";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, rust-overlay, disko, ...}:
+	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, rust-overlay, disko, nix-index-database, ...}:
 	let
 		username = "will";
 		hostname = "nix";
@@ -48,6 +53,9 @@
 					home-manager.useUserPackages = true;
 					home-manager.backupFileExtension = "backup";
 					home-manager.extraSpecialArgs = { inherit username; };
+					home-manager.sharedModules = [
+						nix-index-database.homeModules.nix-index
+					];
 					home-manager.users.${username} = import ./home.nix;
 				}
 			];
