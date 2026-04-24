@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
 	home.packages = with pkgs; [
-		gcc
+		(lib.hiPrio gcc)
 		clang
 		clang-tools
 		cmake
