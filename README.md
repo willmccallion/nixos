@@ -31,9 +31,6 @@ passwd
 # Clone config to expected path
 git clone --recurse-submodules https://github.com/willmccallion/nixos.git ~/.nixos
 
-# Bootstrap rust
-rustup default stable
-
 # Verify backups
 sudo systemctl start btrbk-home.service
 journalctl -u btrbk-home.service -n 50 --no-pager
