@@ -3,15 +3,19 @@
 ## Local snapshots on the NVMe are kept to the bare minimum (just the latest,
 ## needed as the parent for incremental btrfs send). Long-term retention lives
 ## on /data (2 TB HDD).
-{ ... }:
+{ username, ... }:
 
 {
-	# Ensure snapshot source + receive target exist before btrbk runs.
-	# `v` creates a btrfs subvolume (required for /.snapshots/btrbk to hold
-	# per-subvolume snapshots); `d` is a regular directory.
+	# Ownership + snapshot/backup directories.
+	# `/data`          → user-owned so `will` can freely read/write the disk.
+	# `/data/backup`   → root-owned; received btrbk snapshots are read-only
+	#                    subvolumes by design, so the user can browse but not
+	#                    modify backup data.
+	# `/.snapshots/btrbk` → btrfs subvolume for local send-parent snapshots.
 	systemd.tmpfiles.rules = [
+		"d /data            0755 ${username} users -"
 		"v /.snapshots/btrbk 0755 root root -"
-		"d /data/backup      0755 root root -"
+		"d /data/backup     0755 root root -"
 	];
 
 	services.btrbk.instances.home = {
