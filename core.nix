@@ -12,7 +12,7 @@
 	# anything from the last 4 days, drops the rest.
 	programs.nh = {
 		enable = true;
-		flake = "/home/will/projects/nixos";
+		flake = "/home/will/projects/nixos";  # Matches home.nix's nvim symlink path.
 		clean = {
 			enable = true;
 			extraArgs = "--keep-since 4d --keep 3";
