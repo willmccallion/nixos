@@ -14,6 +14,9 @@
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.systemd-boot.configurationLimit = 3;
 	boot.loader.efi.canTouchEfiVariables = true;
+	# systemd-based initrd: caches the LUKS passphrase across devices, so a
+	# single prompt unlocks both cryptroot and cryptdata when they share one.
+	boot.initrd.systemd.enable = true;
 	boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
 	# ── Networking ────────────────────────────────────────────────────────
