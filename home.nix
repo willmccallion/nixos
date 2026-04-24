@@ -16,14 +16,9 @@
 	home.homeDirectory = "/home/${username}";
 	home.stateVersion = "25.11";
 
-	home.extraOutputsToInstall = [ "dev" ];
-
 	home.sessionVariables = {
 		EDITOR = "nvim";
 		VISUAL = "nvim";
-		C_INCLUDE_PATH = "/etc/profiles/per-user/${username}/include";
-		LIBRARY_PATH = "/etc/profiles/per-user/${username}/lib";
-		PKG_CONFIG_PATH = "/etc/profiles/per-user/${username}/lib/pkgconfig:/etc/profiles/per-user/${username}/share/pkgconfig";
 	};
 
 	# ── Neovim (standalone config, cross-platform) ────────────────────────
