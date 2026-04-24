@@ -17,6 +17,8 @@
 	# systemd-based initrd: caches the LUKS passphrase across devices, so a
 	# single prompt unlocks both cryptroot and cryptdata when they share one.
 	boot.initrd.systemd.enable = true;
+	# /tmp in RAM: faster Nix builds and less SSD write wear. Safe with ≥16 GB.
+	boot.tmp.useTmpfs = true;
 	boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
 	# ── Networking ────────────────────────────────────────────────────────
