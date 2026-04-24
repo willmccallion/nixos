@@ -7,6 +7,60 @@
 {
 	programs.fish.functions = {
 
+		# ── Prompt ─────────────────────────────────────────────────────────
+
+		fish_prompt = ''
+			set -l last_status $status
+			set -l n (set_color normal)
+			set -l dim (set_color $fish_color_autosuggestion)
+			set -l dir (set_color $fish_color_cwd)
+			set -l branch (set_color $fish_color_param)
+
+			# Directory
+			printf '%s%s%s' $dir (basename $PWD) $n
+
+			# Git
+			if git rev-parse --is-inside-work-tree >/dev/null 2>&1
+				set -l br (git branch --show-current 2>/dev/null)
+				test -z "$br" && set br (git rev-parse --short HEAD 2>/dev/null)
+				printf ' %s%s%s' $branch $br $n
+
+				# Ahead/behind
+				set -l upstream (git rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)
+				if test -n "$upstream"
+					set -l counts (git rev-list --left-right --count HEAD...'@{upstream}' 2>/dev/null)
+					set -l ahead (echo $counts | awk '{print $1}')
+					set -l behind (echo $counts | awk '{print $2}')
+					test "$ahead" -gt 0 2>/dev/null && printf ' %s%s%s' (set_color d4a373) "$ahead" $n
+					test "$behind" -gt 0 2>/dev/null && printf ' %s%s%s' (set_color d4a373) "$behind" $n
+				end
+
+				# File status
+				set -l staged 0; set -l modified 0; set -l deleted 0; set -l untracked 0
+				for line in (git status --porcelain 2>/dev/null)
+					set -l x (string sub -s 1 -l 1 -- $line)
+					set -l y (string sub -s 2 -l 1 -- $line)
+					contains -- $x A M R D && set staged (math $staged + 1)
+					test "$y" = M && set modified (math $modified + 1)
+					test "$y" = D && set deleted (math $deleted + 1)
+					test "$x" = '?' && set untracked (math $untracked + 1)
+				end
+				test $staged -gt 0 && printf ' %s+%s%s' (set_color a3be8c) $staged $n
+				test $modified -gt 0 && printf ' %s~%s%s' (set_color d4a373) $modified $n
+				test $deleted -gt 0 && printf ' %s-%s%s' (set_color bf616a) $deleted $n
+				test $untracked -gt 0 && printf ' %s?%s%s' $dim $untracked $n
+			end
+
+			# Prompt char
+			if test $last_status -ne 0
+				printf ' %s>%s ' (set_color bf616a) $n
+			else
+				printf ' %s>%s ' $dim $n
+			end
+		'';
+
+		fish_mode_prompt = '''';
+
 		# ── Project / Navigation ───────────────────────────────────────────
 
 		# Fuzzy jump to a project directory and start a dev tmux session
