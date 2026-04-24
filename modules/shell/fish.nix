@@ -59,13 +59,13 @@
 			icat = "kitten icat";
 
 			# Config shortcuts
-			conff = "nvim ~/.config/nixos/modules/shell/fish.nix";
+			conff = "nvim ~/.nixos/modules/shell/fish.nix";
 			reload = "source ~/.config/fish/config.fish";
 
-			# NixOS management
-			nixswitch = "sudo nixos-rebuild switch --flake ~/.config/nixos#nix";
-			nixupdate = "sudo nix flake update --flake ~/.config/nixos && nixswitch";
-			nixgc = "sudo nix-collect-garbage -d";
+			# NixOS management (uses nh — flake path is set in core.nix).
+			nix-switch = "sudo nh os switch";           # rebuild + activate
+			nix-update = "sudo nh os switch --update"; # bump flake inputs, then rebuild
+			nix-gc     = "sudo nh clean all";          # GC per core.nix retention policy
 
 			# Nix shell
 			ns = "nix-shell -p";

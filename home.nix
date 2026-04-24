@@ -25,7 +25,7 @@
 	# The nvim config lives as a git submodule at modules/dev/nvim.
 	# Nix flakes can't see submodule contents, so we symlink at activation.
 	xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink
-		"${config.home.homeDirectory}/projects/nixos/modules/dev/nvim";
+		"${config.home.homeDirectory}/.nixos/modules/dev/nvim";
 
 	programs.home-manager.enable = true;
 }
