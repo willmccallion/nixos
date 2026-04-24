@@ -44,6 +44,12 @@
 		# First-boot password — change immediately with `passwd` after login.
 		# Only used if no password has been set yet; subsequent rebuilds ignore.
 		initialPassword = "changeme";
+		# SSH keys authorized to log in as `will` (over tailscale0 only; see
+		# firewall config below). Add new client pubkeys here to grant access.
+		openssh.authorizedKeys.keys = [
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8l13MYCP0NBgj4OdV/Yxc1YCCQI9j81rknKYGUjsvn will.mccallion@icloud.com"
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAdh4ujrVDPyEW393tSW0AbM29Yn5H96SjLG+2FSuj76 will.mccallion@icloud.com"
+		];
 	};
 
 	# ── Programs ──────────────────────────────────────────────────────────
