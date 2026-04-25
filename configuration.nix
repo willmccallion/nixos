@@ -53,8 +53,21 @@
 	environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
 	# ── Hardware ──────────────────────────────────────────────────────────
-	hardware.bluetooth.enable = true;
+	hardware.bluetooth = {
+		enable = true;
+		powerOnBoot = true;
+		settings.General.Experimental = true;
+	};
 	services.blueman.enable = true;
+
+	# ── Audio ─────────────────────────────────────────────────────────────
+	security.rtkit.enable = true;
+	services.pipewire = {
+		enable = true;
+		alsa.enable = true;
+		alsa.support32Bit = true;
+		pulse.enable = true;
+	};
 
 	# ── Services ──────────────────────────────────────────────────────────
 	services.greetd = {
@@ -79,6 +92,9 @@
 	services.tailscale.enable = true;
 	services.fwupd.enable = true;
 	services.earlyoom.enable = true;
+	services.fstrim.enable = true;
+	services.smartd.enable = true;
+	services.journald.extraConfig = "SystemMaxUse=500M";
 
 	services.syncthing = {
 		enable = true;
