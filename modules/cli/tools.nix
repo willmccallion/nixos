@@ -23,5 +23,6 @@
 		unrar
 		p7zip
 		rclone
+		tldr
 	];
 }
