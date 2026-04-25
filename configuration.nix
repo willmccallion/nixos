@@ -78,6 +78,7 @@
 
 	services.tailscale.enable = true;
 	services.fwupd.enable = true;
+	services.earlyoom.enable = true;
 
 	services.syncthing = {
 		enable = true;
