@@ -12,6 +12,7 @@
 		keyMode = "vi";
 		baseIndex = 1;
 		escapeTime = 0;
+		historyLimit = 50000;
 
 		extraConfig = ''
 			# ── Clipboard / Wayland ──────────────────────────────────────────
