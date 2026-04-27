@@ -1,45 +1,20 @@
 #!/usr/bin/env bash
-# Toggle between rounded (pill) and square (flat) desktop theme
+# Flip between rounded (waybar visible, gaps, rounding, accent border) and
+# square (waybar stopped, no gaps, no rounding) modes. apply-accent reads
+# the new mode from the state file and reconfigures everything.
 
-CFGDIR="$HOME/.config/waybar"
-STATE="/tmp/waybar-rounded"
-ACCENT_FILE="/tmp/waybar-accent"
+set -u
 
-# Remove nix store symlinks if present
-for f in "$CFGDIR/style.css" "$CFGDIR/style-rounded.css" "$CFGDIR/style-square.css"; do
-	[ -L "$f" ] && rm -f "$f"
-done
+STATE_DIR="$HOME/.local/state/desktop-theme"
+MODE_FILE="$STATE_DIR/mode"
 
-if [ -f "$STATE" ]; then
-	# Rounded → Square: hide bar, no gaps, no rounding
-	rm "$STATE"
-	cp "$CFGDIR/style-square.css" "$CFGDIR/style.css" 2>/dev/null
-	pkill -SIGUSR2 waybar
-	sleep 0.1
-	pkill -SIGUSR1 waybar
+mkdir -p "$STATE_DIR"
+current=$(cat "$MODE_FILE" 2>/dev/null || echo "rounded")
 
-	hyprctl keyword general:gaps_in 0
-	hyprctl keyword general:gaps_out 0
-	hyprctl keyword decoration:rounding 0
-	hyprctl keyword general:border_size 0
+if [ "$current" = "rounded" ]; then
+	echo "square" > "$MODE_FILE"
 else
-	# Square → Rounded: show bar, gaps, rounding, accent
-	touch "$STATE"
-	cp "$CFGDIR/style-rounded.css" "$CFGDIR/style.css" 2>/dev/null
-	pkill -SIGUSR1 waybar
-	sleep 0.1
-	pkill -SIGUSR2 waybar
-
-	hyprctl keyword general:gaps_in "4 4 4 4"
-	hyprctl keyword general:gaps_out "8 8 8 8"
-	hyprctl keyword decoration:rounding 10
-	hyprctl keyword general:border_size 2
-
-	# Apply saved accent color, or fallback to cool silver
-	if [ -f "$ACCENT_FILE" ]; then
-		read -r R G B < "$ACCENT_FILE"
-	else
-		R=185; G=185; B=195
-	fi
-	apply-accent "$R" "$G" "$B"
+	echo "rounded" > "$MODE_FILE"
 fi
+
+apply-accent

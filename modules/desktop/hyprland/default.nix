@@ -75,9 +75,7 @@ splash = false
 
 			exec-once = [
 				"hyprpaper"
-				"touch /tmp/waybar-rounded"
-				"waybar"
-				"apply-wallpaper-theme"
+				"restore-theme"
 			];
 
 			env = [
