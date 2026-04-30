@@ -6,7 +6,8 @@
 {
 	imports = [
 		./modules/desktop  # Hyprland, Waybar, Kitty, Wofi, theming, scripts
-		./modules/apps     # Firefox, Discord, Office, Steam
+		./modules/apps     # Firefox, Discord, Office
+		./modules/games    # Minecraft
 		./modules/cli      # Btop, CLI tools
 		./modules/dev      # Git, Rust, C, Zig, Python
 		./modules/shell    # Fish, Tmux
