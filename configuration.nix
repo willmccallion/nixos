@@ -3,11 +3,7 @@
 {
 	imports = [
 		./hardware-configuration.nix
-		./core.nix
-		./nvidia.nix
-		./modules/desktop/stylix.nix
-		./modules/dev/compat.nix
-		./backup.nix
+		./modules/system
 	];
 
 	# ── Boot ──────────────────────────────────────────────────────────────

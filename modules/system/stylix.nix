@@ -10,6 +10,6 @@
 		enable = true;
 		autoEnable = false;
 		polarity = "dark";
-		image = ./hyprland/backgrounds/default.jpg;
+		image = ../desktop/hyprland/backgrounds/default.jpg;
 	};
 }

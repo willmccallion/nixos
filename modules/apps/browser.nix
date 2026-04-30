@@ -69,18 +69,21 @@
       SearchSuggestEnabled = false;
     };
 
-    # Lower-level about:config prefs
-    preferences = {
-      "privacy.donottrackheader.enabled" = true;
-      "privacy.trackingprotection.enabled" = true;
-      "privacy.trackingprotection.socialtracking.enabled" = true;
-      "privacy.firstparty.isolate" = true;
-      "network.cookie.cookieBehavior" = 5; # Reject cross-site trackers
-      "browser.send_pings" = false;
-      "beacon.enabled" = false;
-      "dom.battery.enabled" = false;
-      "media.navigator.enabled" = false;
-      "geo.enabled" = false;
+    # Lower-level about:config prefs (per-profile)
+    profiles.default = {
+      id = 0;
+      settings = {
+        "privacy.donottrackheader.enabled" = true;
+        "privacy.trackingprotection.enabled" = true;
+        "privacy.trackingprotection.socialtracking.enabled" = true;
+        "privacy.firstparty.isolate" = true;
+        "network.cookie.cookieBehavior" = 5; # Reject cross-site trackers
+        "browser.send_pings" = false;
+        "beacon.enabled" = false;
+        "dom.battery.enabled" = false;
+        "media.navigator.enabled" = false;
+        "geo.enabled" = false;
+      };
     };
   };
 }
