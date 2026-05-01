@@ -88,7 +88,44 @@
         "dom.battery.enabled" = false;
         "media.navigator.enabled" = false;
         "geo.enabled" = false;
+
+        "browser.uidensity" = 1;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
+
+      userChrome = ''
+        :root {
+          --tab-min-height: 28px !important;
+          --urlbar-height: 28px !important;
+        }
+
+        #urlbar-container {
+          padding-block: 2px !important;
+        }
+        #urlbar {
+          font-size: 0.92em;
+        }
+
+        #alltabs-button,
+        #fxa-toolbar-menu-button,
+        #PanelUI-menu-button > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+          display: none !important;
+        }
+
+        .titlebar-spacer[type="pre-tabs"],
+        .titlebar-spacer[type="post-tabs"] {
+          display: none !important;
+        }
+
+        .tab-close-button {
+          opacity: 0;
+          transition: opacity 0.15s ease;
+        }
+        .tabbrowser-tab:hover .tab-close-button,
+        .tabbrowser-tab[selected] .tab-close-button {
+          opacity: 1;
+        }
+      '';
     };
   };
 }
