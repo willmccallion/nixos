@@ -67,6 +67,11 @@
       };
 
       SearchSuggestEnabled = false;
+
+      SearchEngines = {
+        Default = "DuckDuckGo";
+        PreventInstalls = false;
+      };
     };
 
     # Lower-level about:config prefs (per-profile)
