@@ -2,7 +2,11 @@
 
 {
 	home.packages = with pkgs; [
-		rustup
+		rustc
+		cargo
+		rustfmt
+		clippy
+		rust-analyzer
 		cargo-watch
 		cargo-edit
 		cargo-expand
