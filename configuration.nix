@@ -12,7 +12,8 @@
 	boot.loader.efi.canTouchEfiVariables = true;
 	boot.initrd.systemd.enable = true;
 	boot.tmp.useTmpfs = true;
-	boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+
+	nixpkgs.config.allowUnfree = true;
 
 	# ── Networking ────────────────────────────────────────────────────────
 	networking.hostName = hostname;
@@ -42,10 +43,8 @@
 	};
 
 	# ── Programs ──────────────────────────────────────────────────────────
-	programs.steam.enable = true;
 	programs.fish.enable = true;
 	programs.hyprland.enable = true;
-	programs.gamemode.enable = true;
 	environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
 	# ── Hardware ──────────────────────────────────────────────────────────

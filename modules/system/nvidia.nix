@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-	nixpkgs.config.allowUnfree = true;
 	services.xserver.videoDrivers = [ "nvidia" ];
 	hardware.graphics.enable = true;
 	hardware.nvidia = {
@@ -10,4 +9,5 @@
 		nvidiaSettings = true;
 		package = config.boot.kernelPackages.nvidiaPackages.stable;
 	};
+	boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 }
