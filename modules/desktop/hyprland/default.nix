@@ -29,19 +29,14 @@
 	];
 
 	# ── Wallpapers ─────────────────────────────────────────────────────────
-	home.activation.deployWallpapers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-		BG_SRC="${./backgrounds}"
-		BG_DEST="$HOME/.config/hypr/backgrounds"
+	xdg.configFile."hypr/backgrounds".source =
+		config.lib.file.mkOutOfStoreSymlink
+		"${config.home.homeDirectory}/.nixos/modules/desktop/hyprland/backgrounds";
+
+	home.activation.deployDefaultWallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
 		BG_DEFAULT="$HOME/.config/hypr/background.jpg"
-
-		if [ ! -d "$BG_DEST" ]; then
-			mkdir -p "$BG_DEST"
-			cp "$BG_SRC"/* "$BG_DEST/"
-			chmod u+w "$BG_DEST"/*
-		fi
-
 		if [ ! -f "$BG_DEFAULT" ]; then
-			cp "$BG_SRC/default.jpg" "$BG_DEFAULT"
+			cp "${./backgrounds}/default.jpg" "$BG_DEFAULT"
 			chmod u+w "$BG_DEFAULT"
 		fi
 	'';
