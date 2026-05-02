@@ -284,6 +284,27 @@
 			end
 		'';
 
+		# ── NixOS ──────────────────────────────────────────────────────────
+
+		# Rebuild and switch, auto-pulling nvim submodule first
+		nix-switch = ''
+			set -l nvim_dir ~/.nixos/modules/dev/nvim
+			if test -d $nvim_dir/.git
+				pushd $nvim_dir >/dev/null
+				if git diff --quiet; and git diff --cached --quiet
+					# Submodules default to detached HEAD; ensure we're on main
+					git symbolic-ref -q HEAD >/dev/null
+					or git checkout main
+					git pull --ff-only origin main
+					or echo "nvim: pull failed"
+				else
+					echo "nvim: local changes, skipping auto-pull"
+				end
+				popd >/dev/null
+			end
+			nh os switch $argv
+		'';
+
 		# ── Python ─────────────────────────────────────────────────────────
 
 		# Toggle Python virtual environment

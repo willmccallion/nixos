@@ -63,7 +63,6 @@
 			reload = "source ~/.config/fish/config.fish";
 
 			# NixOS management
-			nix-switch = "nh os switch";
 			nix-update = "nh os switch --update";
 			nix-gc     = "nh clean all";
 
