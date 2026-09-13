@@ -13,6 +13,9 @@
 	boot.initrd.systemd.enable = true;
 	boot.tmp.useTmpfs = true;
 
+	# Userland TPM2 access (udev rules, tpm2-tss) for systemd-cryptenroll
+	security.tpm2.enable = true;
+
 	nixpkgs.config.allowUnfree = true;
 
 	# Locale
@@ -30,6 +33,7 @@
 		openssh.authorizedKeys.keys = [
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8l13MYCP0NBgj4OdV/Yxc1YCCQI9j81rknKYGUjsvn will.mccallion@icloud.com"
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAdh4ujrVDPyEW393tSW0AbM29Yn5H96SjLG+2FSuj76 will.mccallion@icloud.com"
+		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBgCLuQVODwMFmmX6y5/HcBle4xwgwVSjFiYB7YqrEiJ will.mccallion@icloud.com"
 		];
 	};
 

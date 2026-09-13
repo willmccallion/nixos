@@ -1,11 +1,12 @@
 { pkgs, config, lib, ... }:
 
 let
-	jdk = pkgs.temurin-bin-25;
+	jdks = with pkgs; [ temurin-bin-8 temurin-bin-17 temurin-bin-21 temurin-bin-25];
+  jdk = pkgs.temurin-bin-25;
 
 	prismlauncher-nvidia = pkgs.symlinkJoin {
 		name = "prismlauncher-nvidia";
-		paths = [ (pkgs.prismlauncher.override { jdks = [ jdk ]; }) ];
+		paths = [ (pkgs.prismlauncher.override { inherit jdks; }) ];
 		nativeBuildInputs = [ pkgs.makeWrapper ];
 		postBuild = ''
 			wrapProgram $out/bin/prismlauncher \

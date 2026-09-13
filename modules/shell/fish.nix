@@ -12,9 +12,6 @@
 		interactiveShellInit = ''
 			# Disable greeting and show fastfetch instead
 			set fish_greeting ""
-			if status is-interactive; and not set -q INSIDE_TMUX_DEV
-				fastfetch
-			end
 
 			# Vi key bindings
 			fish_vi_key_bindings

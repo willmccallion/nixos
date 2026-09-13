@@ -11,6 +11,7 @@
 		./modules/cli      # Btop, CLI tools
 		./modules/dev      # Git, Rust, C, Zig, Python
 		./modules/shell    # Fish, Tmux
+		./modules/school   # Course-specific toolchains (CMPUT 415, …)
 	];
 
 	home.username = username;

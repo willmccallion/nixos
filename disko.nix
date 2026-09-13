@@ -27,7 +27,10 @@ in
 						content = {
 							type = "luks";
 							name = "cryptroot";
-							settings.allowDiscards = true;
+							settings = {
+								allowDiscards = true;
+								crypttabExtraOpts = [ "tpm2-device=auto" ];
+							};
 							content = {
 								type = "btrfs";
 								extraArgs = [ "-L" "nixos" "-f" ];
@@ -54,7 +57,10 @@ in
 					content = {
 						type = "luks";
 						name = "cryptdata";
-						settings.allowDiscards = true;
+						settings = {
+							allowDiscards = true;
+							crypttabExtraOpts = [ "tpm2-device=auto" ];
+						};
 						content = {
 							type = "btrfs";
 							extraArgs = [ "-L" "data" "-f" ];
