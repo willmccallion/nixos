@@ -12,4 +12,6 @@
 		libxslt
 		icu
 	];
+
+	services.envfs.enable = true;
 }
