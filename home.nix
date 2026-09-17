@@ -20,7 +20,19 @@
 	home.sessionVariables = {
 		EDITOR = "nvim";
 		VISUAL = "nvim";
+
+		# Keep transient tool state out of $HOME. These paths only take effect
+		# if the tool is ever invoked (e.g. via nix-shell); no packages here
+		# install go/docker/wget by default.
+		GOPATH = "${config.xdg.dataHome}/go";
+		DOCKER_CONFIG = "${config.xdg.configHome}/docker";
+		__GL_SHADER_DISK_CACHE_PATH = "${config.xdg.cacheHome}/nv";
 	};
+
+	# Redirect wget's HSTS state file. wget doesn't respect XDG on its own.
+	home.file.".wgetrc".text = ''
+		hsts-file = ${config.xdg.stateHome}/wget-hsts
+	'';
 
 	# ── Neovim (standalone config, cross-platform) ────────────────────────
 	# The nvim config lives as a git submodule at modules/dev/nvim.
