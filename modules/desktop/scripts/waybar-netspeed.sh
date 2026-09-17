@@ -25,4 +25,16 @@ fmt_speed() {
 down=$(fmt_speed $rx_kb)
 up=$(fmt_speed $tx_kb)
 
-echo "{\"text\": \"󰛳 ↓${down} ↑${up}\", \"tooltip\": \"Interface: $iface\"}"
+link_speed=$(cat "/sys/class/net/$iface/speed" 2>/dev/null)
+if [ -n "$link_speed" ] && [ "$link_speed" -gt 0 ] 2>/dev/null; then
+	if [ "$link_speed" -ge 1000 ]; then
+		link_fmt=$(printf "%.1f Gbps" "$(echo "scale=1; $link_speed/1000" | @bc@)")
+	else
+		link_fmt="${link_speed} Mbps"
+	fi
+	tooltip="Interface: $iface\nLink: $link_fmt"
+else
+	tooltip="Interface: $iface"
+fi
+
+echo "{\"text\": \"󰛳 ↓${down} ↑${up}\", \"tooltip\": \"$tooltip\"}"
