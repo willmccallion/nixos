@@ -68,7 +68,6 @@ in
 		})
 
 		# ── Runtime dependencies pulled in for general use ───────────────
-		pkgs.python3
 		pkgs.imagemagick
 		pkgs.lm_sensors
 		pkgs.iproute2
