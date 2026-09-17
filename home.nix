@@ -21,9 +21,8 @@
 		EDITOR = "nvim";
 		VISUAL = "nvim";
 
-		# Keep transient tool state out of $HOME. These paths only take effect
-		# if the tool is ever invoked (e.g. via nix-shell); no packages here
-		# install go/docker/wget by default.
+		# Keep transient tool state out of $HOME. go and docker aren't installed
+		# here, so those two only take effect if invoked via nix-shell.
 		GOPATH = "${config.xdg.dataHome}/go";
 		DOCKER_CONFIG = "${config.xdg.configHome}/docker";
 		__GL_SHADER_DISK_CACHE_PATH = "${config.xdg.cacheHome}/nv";
