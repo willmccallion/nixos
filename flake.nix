@@ -11,8 +11,6 @@
 
 		neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
-		stylix.url = "github:danth/stylix";
-
 		disko = {
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +22,7 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, neovim-nightly, stylix, disko, nix-index-database, ...}:
+	outputs = { self, nixpkgs, home-manager, neovim-nightly, disko, nix-index-database, ...}:
 	let
 		username = "will";
 		hostname = "nix";
@@ -37,7 +35,6 @@
 				./configuration.nix
 				disko.nixosModules.disko
 				./disko.nix
-				stylix.nixosModules.stylix
 				home-manager.nixosModules.home-manager
 				{
 					nixpkgs.overlays = [
