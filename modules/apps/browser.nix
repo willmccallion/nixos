@@ -91,6 +91,11 @@
 
         "browser.uidensity" = 1;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+        # Save downloads directly to the HDD instead of following ~/Downloads.
+        "browser.download.folderList" = 2;
+        "browser.download.dir" = "/data/media/downloads";
+        "browser.download.useDownloadDir" = true;
       };
 
       userChrome = ''
