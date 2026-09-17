@@ -23,10 +23,15 @@
 			"$mainMod, B, exec, toggle-theme"
 			"$mainMod, W, exec, wallpaper-picker"
 
-			# ── Screenshots ───────────────────────────────────────
-			"$mainMod SHIFT, W, exec, grim -g \"$(slurp)\" - | wl-copy"
-			", Print, exec, grim -g \"$(slurp)\" - | wl-copy"
-			"$mainMod, Print, exec, grim - | wl-copy"
+			# ── Screenshots (macOS-style: region / full / window) ─
+			"$mainMod SHIFT, W, exec, hyprshot -m region -o ~/Downloads"
+			", Print, exec, hyprshot -m region -o ~/Downloads"
+			"$mainMod, Print, exec, hyprshot -m output -o ~/Downloads"
+			"$mainMod SHIFT, R, exec, hyprshot -m window -o ~/Downloads"
+
+			# ── Notification / Control Center ─────────────────────
+			"$mainMod, N, exec, swaync-client -t -sw"
+			"$mainMod SHIFT, N, exec, swaync-client -d -sw"
 
 			# ── Focus (vim) ───────────────────────────────────────
 			"$mainMod, J, movefocus, l"

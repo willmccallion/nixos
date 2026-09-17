@@ -21,6 +21,7 @@
 	home.packages = with pkgs; [
 		grim
 		slurp
+		hyprshot
 		wl-clipboard
 		hyprpaper
 		playerctl
@@ -60,7 +61,7 @@ splash = false
 
 		settings = {
 			"$terminal" = "kitty";
-			"$menu" = "wofi --show drun";
+			"$menu" = "wofi --show drun --prompt Search";
 			"$mainMod" = "Alt_L";
 
 			monitor = [
@@ -71,6 +72,7 @@ splash = false
 			exec-once = [
 				"hyprpaper"
 				"restore-theme"
+				"swaync"
 			];
 
 			env = [
