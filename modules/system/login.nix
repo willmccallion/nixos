@@ -17,4 +17,5 @@
 			PermitRootLogin = "no";
 		};
 	};
+	systemd.services.sshd.serviceConfig.Restart = "always";
 }
