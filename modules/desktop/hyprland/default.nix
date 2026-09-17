@@ -12,6 +12,7 @@
 	];
 
 	home.pointerCursor = {
+		enable = true;
 		name = "Bibata-Modern-Classic";
 		package = pkgs.bibata-cursors;
 		size = 24;
@@ -26,7 +27,6 @@
 		hyprpaper
 		playerctl
 		brightnessctl
-		bibata-cursors
 	];
 
 	# ── Wallpapers ─────────────────────────────────────────────────────────
@@ -58,6 +58,9 @@ splash = false
 	# ── Compositor ─────────────────────────────────────────────────────────
 	wayland.windowManager.hyprland = {
 		enable = true;
+
+		# Pin the pre-26.05 default; the new default is "lua".
+		configType = "hyprlang";
 
 		settings = {
 			"$terminal" = "kitty";

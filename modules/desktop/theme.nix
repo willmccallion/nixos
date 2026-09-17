@@ -2,12 +2,10 @@
 ## GTK/Qt theming, icon theme, and fonts.
 ## Dracula GTK ensures dark mode in GTK/Qt applications.
 ## Remove this import from desktop/default.nix to disable.
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
 	home.packages = with pkgs; [
-		dracula-theme
-		papirus-icon-theme
 		nerd-fonts.caskaydia-cove
 		inter
 	];
@@ -22,10 +20,12 @@
 			name = "Papirus-Dark";
 			package = pkgs.papirus-icon-theme;
 		};
+		# Pin the pre-26.05 default; the new default is null.
+		gtk4.theme = config.gtk.theme;
 	};
 
 	qt = {
 		enable = true;
-		platformTheme.name = "gtk";
+		platformTheme.name = "gtk3";
 	};
 }

@@ -4,6 +4,9 @@
   programs.firefox = {
     enable = true;
 
+    # Pin the pre-26.05 default; the new default moves the profile under XDG.
+    configPath = ".mozilla/firefox";
+
     # Enterprise policies — applied to all profiles, can't be overridden
     policies = {
       DisableTelemetry = true;
