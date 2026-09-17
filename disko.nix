@@ -35,10 +35,9 @@ in
 								type = "btrfs";
 								extraArgs = [ "-L" "nixos" "-f" ];
 								subvolumes = {
-									"@"          = { mountpoint = "/";           mountOptions = ssdBtrfsOpts; };
-									"@home"      = { mountpoint = "/home";       mountOptions = ssdBtrfsOpts; };
-									"@nix"       = { mountpoint = "/nix";        mountOptions = ssdBtrfsOpts; };
-									"@snapshots" = { mountpoint = "/.snapshots"; mountOptions = ssdBtrfsOpts; };
+									"@"     = { mountpoint = "/";     mountOptions = ssdBtrfsOpts; };
+									"@home" = { mountpoint = "/home"; mountOptions = ssdBtrfsOpts; };
+									"@nix"  = { mountpoint = "/nix";  mountOptions = ssdBtrfsOpts; };
 								};
 							};
 						};
