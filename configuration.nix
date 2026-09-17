@@ -21,7 +21,6 @@
 	# Locale
 	time.timeZone = "America/Edmonton";
 	i18n.defaultLocale = "en_CA.UTF-8";
-	services.xserver.xkb.layout = "us";
 
 	# User
 	users.users.${username} = {
