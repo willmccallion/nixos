@@ -37,7 +37,7 @@
 
 				# ── Left ──────────────────────────────────────────────
 				"hyprland/workspaces" = {
-					format = "{id}";
+					format = "";
 					on-click = "activate";
 					sort-by-number = true;
 					active-only = false;
