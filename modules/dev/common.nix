@@ -4,6 +4,7 @@
 	home.packages = with pkgs; [
 		neovim
 		stylua
+		lua-language-server
 		tree-sitter
 		gh
 		gnumake
