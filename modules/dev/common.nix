@@ -3,6 +3,7 @@
 {
 	home.packages = with pkgs; [
 		neovim
+		stylua
 		tree-sitter
 		gh
 		gnumake
