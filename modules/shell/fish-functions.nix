@@ -220,6 +220,84 @@
       			end
       		'';
 
+    # ── Build ──────────────────────────────────────────────────────────
+
+    # Build the nearest enclosing project, detected by marker file.
+    # Release by default, -d/--debug for symbols; extra args reach the tool.
+    build = ''
+      argparse -i d/debug -- $argv
+      or return 1
+
+      set -l root $PWD
+      set -l kind
+
+      while true
+        if test -f "$root/Cargo.toml"
+          set kind cargo
+        else if test -f "$root/build.zig"
+          set kind zig
+        else if test -f "$root/CMakeLists.txt"
+          set kind cmake
+        else if test -f "$root/Makefile" -o -f "$root/makefile" -o -f "$root/GNUmakefile"
+          set kind make
+        else if test -f "$root/pyproject.toml" -o -f "$root/setup.py"
+          set kind python
+        else if test -f "$root/flake.nix"
+          set kind nix
+        end
+
+        test -n "$kind" && break
+        test "$root" = / && break
+        set root (path dirname "$root")
+      end
+
+      if test -z "$kind"
+        echo "build: no project marker found from $PWD upwards"
+        echo "       looked for Cargo.toml, build.zig, CMakeLists.txt, Makefile, pyproject.toml, flake.nix"
+        return 1
+      end
+
+      set -l profile release
+      set -q _flag_debug && set profile debug
+
+      set -l jobs (nproc)
+      echo -e "\e[34mbuild:\e[0m $kind ($profile) in $root"
+
+      # pushd rather than cd so the cwd is restored even when the build fails
+      pushd "$root" >/dev/null
+
+      switch $kind
+        case cargo
+          if test "$profile" = release
+            cargo build --release $argv
+          else
+            cargo build $argv
+          end
+        case zig
+          if test "$profile" = release
+            zig build -Doptimize=ReleaseFast $argv
+          else
+            zig build $argv
+          end
+        case cmake
+          set -l build_type Release
+          test "$profile" = debug && set build_type Debug
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=$build_type
+          and cmake --build build -j $jobs $argv
+        case make
+          make -j $jobs $argv
+        case python
+          echo -e "\e[33mnote:\e[0m nothing to compile; running pyright"
+          pyright $argv
+        case nix
+          nix build $argv
+      end
+
+      set -l result $status
+      popd >/dev/null
+      return $result
+    '';
+
     # ── Cleanup ────────────────────────────────────────────────────────
 
     # Scan ~/projects for heavy build directories and offer to delete
