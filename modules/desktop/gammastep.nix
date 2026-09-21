@@ -4,20 +4,20 @@
 { ... }:
 
 {
-	services.gammastep = {
-		enable = true;
+  services.gammastep = {
+    enable = true;
 
-		latitude = 53.55;
-		longitude = -113.49;
+    latitude = 53.55;
+    longitude = -113.49;
 
-		temperature = {
-			day = 6500;     # neutral daylight (Kelvin)
-			night = 3400;   # warm / amber
-		};
+    temperature = {
+      day = 6500; # neutral daylight (Kelvin)
+      night = 3400; # warm / amber
+    };
 
-		settings.general = {
-			fade = 1;                # smooth transition (1 = on)
-			adjustment-method = "wayland";
-		};
-	};
+    settings.general = {
+      fade = 1; # smooth transition (1 = on)
+      adjustment-method = "wayland";
+    };
+  };
 }

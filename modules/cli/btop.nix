@@ -5,11 +5,11 @@
 { ... }:
 
 {
-	programs.btop = {
-		enable = true;
-		settings = {
-			color_theme = "wallpaper";
-			vim_keys = true;
-		};
-	};
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "wallpaper";
+      vim_keys = true;
+    };
+  };
 }

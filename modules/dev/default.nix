@@ -3,12 +3,12 @@
 { ... }:
 
 {
-	imports = [
-		./common.nix  # Git, debuggers, build tools
-		./rust.nix    # Rust toolchain
-		./c.nix       # C/C++ toolchain
-		./zig.nix     # Zig language
-		./python.nix  # Python
-		./nix.nix     # Nix language server and formatter
-	];
+  imports = [
+    ./common.nix # Git, debuggers, build tools
+    ./rust.nix # Rust toolchain
+    ./c.nix # C/C++ toolchain
+    ./zig.nix # Zig language
+    ./python.nix # Python
+    ./nix.nix # Nix language server and formatter
+  ];
 }

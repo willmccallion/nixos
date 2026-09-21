@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-	home.packages = with pkgs; [
-		libreoffice
-		obsidian
-	];
+  home.packages = with pkgs; [
+    libreoffice
+    obsidian
+  ];
 }

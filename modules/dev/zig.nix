@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-	home.packages = with pkgs; [
-		zig
-		zls
-	];
+  home.packages = with pkgs; [
+    zig
+    zls
+  ];
 }

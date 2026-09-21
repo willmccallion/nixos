@@ -93,6 +93,10 @@
         "browser.uidensity" = 1;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
+        # Force dark chrome and about:newtab instead of following the portal,
+        # which reports no preference before xdg-desktop-portal-gtk is up.
+        "ui.systemUsesDarkTheme" = 1;
+
         # Save downloads directly to the HDD instead of following ~/Downloads.
         "browser.download.folderList" = 2;
         "browser.download.dir" = "/data/media/downloads";

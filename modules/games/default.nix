@@ -1,7 +1,7 @@
 { ... }:
 
 {
-	imports = [
-		./minecraft.nix
-	];
+  imports = [
+    ./minecraft.nix
+  ];
 }

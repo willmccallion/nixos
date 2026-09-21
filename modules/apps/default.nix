@@ -1,9 +1,9 @@
 { ... }:
 
 {
-	imports = [
-		./browser.nix
-		./office.nix
-		./discord.nix
-	];
+  imports = [
+    ./browser.nix
+    ./office.nix
+    ./discord.nix
+  ];
 }

@@ -4,9 +4,9 @@
 { pkgs, ... }:
 
 {
-	home.packages = with pkgs; [
-		python3
-		python3Packages.pip
-		pyright
-	];
+  home.packages = with pkgs; [
+    python3
+    python3Packages.pip
+    pyright
+  ];
 }

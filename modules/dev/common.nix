@@ -1,32 +1,32 @@
 { pkgs, ... }:
 
 {
-	home.packages = with pkgs; [
-		neovim
-		stylua
-		lua-language-server
-		tree-sitter
-		gh
-		gnumake
-		gdb
-		lldb
-		claude-code
-		tokei
-		qemu
-	];
+  home.packages = with pkgs; [
+    neovim
+    stylua
+    lua-language-server
+    tree-sitter
+    gh
+    gnumake
+    gdb
+    lldb
+    claude-code
+    tokei
+    qemu
+  ];
 
-	programs.git = {
-		enable = true;
-		settings = {
-			user.name = "Will McCallion";
-			user.email = "will.mccallion@icloud.com";
-			init.defaultBranch = "main";
-			push.autoSetupRemote = true;
-		};
-	};
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = "Will McCallion";
+      user.email = "will.mccallion@icloud.com";
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true;
+    };
+  };
 
-	programs.direnv = {
-		enable = true;
-		nix-direnv.enable = true;
-	};
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 }

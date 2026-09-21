@@ -5,27 +5,35 @@
 { config, pkgs, ... }:
 
 {
-	home.packages = with pkgs; [
-		nerd-fonts.caskaydia-cove
-		inter
-	];
+  home.packages = with pkgs; [
+    nerd-fonts.caskaydia-cove
+    inter
+  ];
 
-	gtk = {
-		enable = true;
-		theme = {
-			name = "Dracula";
-			package = pkgs.dracula-theme;
-		};
-		iconTheme = {
-			name = "Papirus-Dark";
-			package = pkgs.papirus-icon-theme;
-		};
-		# Pin the pre-26.05 default; the new default is null.
-		gtk4.theme = config.gtk.theme;
-	};
+  # xdg-desktop-portal-gtk reads this and reports it as
+  # org.freedesktop.appearance color-scheme. Without it the portal answers
+  # "no preference" and portal-aware apps (Firefox, libadwaita) render light.
+  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
-	qt = {
-		enable = true;
-		platformTheme.name = "gtk3";
-	};
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Dracula";
+      package = pkgs.dracula-theme;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    # Pin the pre-26.05 default; the new default is null.
+    gtk4.theme = config.gtk.theme;
+
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk3";
+  };
 }

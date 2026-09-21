@@ -2,98 +2,104 @@
 ## Wayland compositor configuration.
 ## Split into: appearance, keybinds, rules.
 ## Dynamic theming via toggle-theme (Alt+B) and wallpaper picker (Alt+W).
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-	imports = [
-		./appearance.nix
-		./keybinds.nix
-		./rules.nix
-	];
+  imports = [
+    ./appearance.nix
+    ./keybinds.nix
+    ./rules.nix
+  ];
 
-	home.pointerCursor = {
-		enable = true;
-		name = "Bibata-Modern-Classic";
-		package = pkgs.bibata-cursors;
-		size = 24;
-		gtk.enable = true;
-	};
+  home.pointerCursor = {
+    enable = true;
+    name = "Bibata-Modern-Classic";
+    package = pkgs.bibata-cursors;
+    size = 24;
+    gtk.enable = true;
+  };
 
-	home.packages = with pkgs; [
-		grim
-		slurp
-		hyprshot
-		wl-clipboard
-		hyprpaper
-		playerctl
-		brightnessctl
-	];
+  home.packages = with pkgs; [
+    grim
+    slurp
+    hyprshot
+    wl-clipboard
+    hyprpaper
+    playerctl
+    brightnessctl
+  ];
 
-	# ── Wallpapers ─────────────────────────────────────────────────────────
-	xdg.configFile."hypr/backgrounds".source =
-		config.lib.file.mkOutOfStoreSymlink
-		"${config.home.homeDirectory}/.nixos/modules/desktop/hyprland/backgrounds";
+  # ── Wallpapers ─────────────────────────────────────────────────────────
+  xdg.configFile."hypr/backgrounds".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/modules/desktop/hyprland/backgrounds";
 
-	home.activation.deployDefaultWallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-		BG_DEFAULT="$HOME/.config/hypr/background.jpg"
-		if [ ! -f "$BG_DEFAULT" ]; then
-			cp "${./backgrounds}/default.jpg" "$BG_DEFAULT"
-			chmod u+w "$BG_DEFAULT"
-		fi
-	'';
+  home.activation.deployDefaultWallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    		BG_DEFAULT="$HOME/.config/hypr/background.jpg"
+    		if [ ! -f "$BG_DEFAULT" ]; then
+    			cp "${./backgrounds}/default.jpg" "$BG_DEFAULT"
+    			chmod u+w "$BG_DEFAULT"
+    		fi
+    	'';
 
-	xdg.configFile."hypr/hyprpaper.conf".text = let
-		bg = "${config.home.homeDirectory}/.config/hypr/background.jpg";
-	in ''
-preload = ${bg}
+  xdg.configFile."hypr/hyprpaper.conf".text =
+    let
+      bg = "${config.home.homeDirectory}/.config/hypr/background.jpg";
+    in
+    ''
+      preload = ${bg}
 
-wallpaper {
-    monitor =
-    path = ${bg}
-}
+      wallpaper {
+          monitor =
+          path = ${bg}
+      }
 
-splash = false
-	'';
+      splash = false
+      	'';
 
-	# ── Compositor ─────────────────────────────────────────────────────────
-	wayland.windowManager.hyprland = {
-		enable = true;
+  # ── Compositor ─────────────────────────────────────────────────────────
+  wayland.windowManager.hyprland = {
+    enable = true;
 
-		# Pin the pre-26.05 default; the new default is "lua".
-		configType = "hyprlang";
+    # Pin the pre-26.05 default; the new default is "lua".
+    configType = "hyprlang";
 
-		settings = {
-			"$terminal" = "kitty";
-			"$menu" = "wofi --show drun --prompt Search";
-			"$mainMod" = "Alt_L";
+    settings = {
+      "$terminal" = "kitty";
+      "$menu" = "wofi --show drun --prompt Search";
+      "$mainMod" = "Alt_L";
 
-			monitor = [
-				"HDMI-A-1, preferred, 0x0, 1"
-				"HDMI-A-2, preferred, 1920x0, 1"
-			];
+      monitor = [
+        "HDMI-A-1, preferred, 0x0, 1"
+        "HDMI-A-2, preferred, 1920x0, 1"
+      ];
 
-			exec-once = [
-				"hyprpaper"
-				"restore-theme"
-				"swaync"
-			];
+      exec-once = [
+        "hyprpaper"
+        "restore-theme"
+        "swaync"
+      ];
 
-			env = [
-				"XCURSOR_SIZE, 24"
-				"XCURSOR_THEME, Bibata-Modern-Classic"
-				"HYPRCURSOR_SIZE, 24"
-				"HYPRCURSOR_THEME, Bibata-Modern-Classic"
-				"GDK_BACKEND, wayland,x11"
-				"__GLX_VENDOR_LIBRARY_NAME, nvidia"
-			];
-		};
+      env = [
+        "XCURSOR_SIZE, 24"
+        "XCURSOR_THEME, Bibata-Modern-Classic"
+        "HYPRCURSOR_SIZE, 24"
+        "HYPRCURSOR_THEME, Bibata-Modern-Classic"
+        "GDK_BACKEND, wayland,x11"
+        "__GLX_VENDOR_LIBRARY_NAME, nvidia"
+      ];
+    };
 
-		extraConfig = ''
-			ecosystem:no_update_news = true
+    extraConfig = ''
+      			ecosystem:no_update_news = true
 
-			cursor {
-				no_hardware_cursors = true
-			}
-		'';
-	};
+      			cursor {
+      				no_hardware_cursors = true
+      			}
+      		'';
+  };
 }
