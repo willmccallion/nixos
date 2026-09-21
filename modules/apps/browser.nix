@@ -84,8 +84,6 @@
         "privacy.donottrackheader.enabled" = true;
         "privacy.trackingprotection.enabled" = true;
         "privacy.trackingprotection.socialtracking.enabled" = true;
-        "privacy.firstparty.isolate" = true;
-        "network.cookie.cookieBehavior" = 5; # Reject cross-site trackers
         "browser.send_pings" = false;
         "beacon.enabled" = false;
         "dom.battery.enabled" = false;
