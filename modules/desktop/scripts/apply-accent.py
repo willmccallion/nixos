@@ -217,25 +217,26 @@ def tint_kitty(R, G, B):
 
 def apply_hyprland(mode, R, G, B, BORDER2):
     if mode == "rounded":
-        cmds = [
-            ("general:col.active_border",
-             f"rgba({hexc(R, G, B)}ee) rgba({hexc(*BORDER2)}99) 45deg"),
-            ("general:col.inactive_border", "rgba(ffffff10)"),
-            ("general:gaps_in", "4 4 4 4"),
-            ("general:gaps_out", "8 8 8 8"),
-            ("decoration:rounding", "10"),
-            ("general:border_size", "2"),
-        ]
+        gradient = (
+            '{ colors = { "rgba(%see)", "rgba(%s99)" }, angle = 45 }'
+            % (hexc(R, G, B), hexc(*BORDER2))
+        )
+        config = """hl.config({
+          general = {
+            col = { active_border = %s, inactive_border = "rgba(ffffff10)" },
+            gaps_in = 4,
+            gaps_out = 8,
+            border_size = 2,
+          },
+          decoration = { rounding = 10 },
+        })""" % gradient
     else:
-        cmds = [
-            ("general:gaps_in", "0"),
-            ("general:gaps_out", "0"),
-            ("decoration:rounding", "0"),
-            ("general:border_size", "0"),
-        ]
-    for key, val in cmds:
-        subprocess.run(["@hyprctl@", "keyword", key, val],
-                       check=False, stdout=subprocess.DEVNULL)
+        config = """hl.config({
+          general = { gaps_in = 0, gaps_out = 0, border_size = 0 },
+          decoration = { rounding = 0 },
+        })"""
+    subprocess.run(["@hyprctl@", "eval", config],
+                   check=False, stdout=subprocess.DEVNULL)
 
 
 def set_waybar_state(mode):

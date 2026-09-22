@@ -1,6 +1,6 @@
 ## ── Hyprland ──────────────────────────────────────────────────────────────────
-## Wayland compositor configuration.
-## Split into: appearance, keybinds, rules.
+## Wayland compositor configuration, written in Hyprland's Lua config format.
+## Split into: core, appearance, keybinds, rules, autostart (see ./lua).
 ## Dynamic theming via toggle-theme (Alt+B) and wallpaper picker (Alt+W).
 {
   config,
@@ -10,12 +10,6 @@
 }:
 
 {
-  imports = [
-    ./appearance.nix
-    ./keybinds.nix
-    ./rules.nix
-  ];
-
   home.pointerCursor = {
     enable = true;
     name = "Bibata-Modern-Classic";
@@ -65,41 +59,23 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    # Pin the pre-26.05 default; the new default is "lua".
-    configType = "hyprlang";
+    configType = "lua";
 
-    settings = {
-      "$terminal" = "kitty";
-      "$menu" = "wofi --show drun --prompt Search";
-      "$mainMod" = "Alt_L";
-
-      monitor = [
-        "HDMI-A-1, preferred, 0x0, 1"
-        "HDMI-A-2, preferred, 1920x0, 1"
-      ];
-
-      exec-once = [
-        "hyprpaper"
-        "restore-theme"
-        "swaync"
-      ];
-
-      env = [
-        "XCURSOR_SIZE, 24"
-        "XCURSOR_THEME, Bibata-Modern-Classic"
-        "HYPRCURSOR_SIZE, 24"
-        "HYPRCURSOR_THEME, Bibata-Modern-Classic"
-        "GDK_BACKEND, wayland,x11"
-        "__GLX_VENDOR_LIBRARY_NAME, nvidia"
-      ];
+    extraLuaFiles = {
+      "00-core" = ./lua/00-core.lua;
+      "10-appearance" = ./lua/10-appearance.lua;
+      "20-keybinds" = ./lua/20-keybinds.lua;
+      "30-rules" = ./lua/30-rules.lua;
+      "40-autostart" = {
+        content = ./lua/40-autostart.lua;
+        autoLoad = false;
+      };
     };
 
+    # restore-theme restarts waybar.service, so autostart is required after
+    # Home Manager's own hyprland.start hook brings up the session target.
     extraConfig = ''
-      			ecosystem:no_update_news = true
-
-      			cursor {
-      				no_hardware_cursors = true
-      			}
-      		'';
+      require("40-autostart")
+    '';
   };
 }
