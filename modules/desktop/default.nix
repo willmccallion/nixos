@@ -13,5 +13,6 @@
     ./scripts.nix # Dynamic theming scripts (wallpaper, toggle-theme, apply-accent)
     ./gammastep.nix # Night light (warm screen colour at night)
     ./hypridle.nix # Screen dim + DPMS on idle
+    ./udiskie.nix # Removable drive automounting
   ];
 }
